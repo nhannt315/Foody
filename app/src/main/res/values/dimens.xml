@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Splash Screen-->
+    <dimen name="info_margin_bottom">8dp</dimen>
+    <dimen name="progress_bar_size">20dp</dimen>
+    <dimen name="splash_logo_witdh">200dp</dimen>
+    <dimen name="splash_logo_height">100dp</dimen>
+    <dimen name="splash_logo_margin_top">165dp</dimen>
+
+</resources>

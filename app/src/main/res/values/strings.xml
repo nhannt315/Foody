@@ -2,6 +2,7 @@
     <string name="app_name">Foody</string>
     
     <!--Splash Screen-->
-    <string name="version">Version 1.0</string>
-    <string name="app_info">nhannt</string>
+    <string name="version_splash">Phiên bản %s</string>
+    <string name="app_info_splash">nhannt</string>
+    <string name="loading_splash">Đang tải</string>
 </resources>
