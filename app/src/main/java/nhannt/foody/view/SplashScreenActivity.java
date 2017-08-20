@@ -2,20 +2,36 @@ package nhannt.foody.view;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import nhannt.foody.Navigator;
 import nhannt.foody.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
+    private static final long DELAY_TIME = 2000;
     private TextView mTvVersion;
+    private Navigator mNavigator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
+        mNavigator = new Navigator(SplashScreenActivity.this);
         setupViews();
+        navigateToLogin();
+    }
+
+    private void navigateToLogin() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mNavigator.startActivity(LoginActivity.class);
+            }
+        }, DELAY_TIME);
     }
 
     private void setupViews() {

@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#cd2027</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="colorFoody">#cd2027</color>
-    <color name="colorWhite">#fff</color>
+    <color name="color_foody">#cd2027</color>
+    <color name="color_white">#fff</color>
+    <color name="transparent_bg_login">#80cd2027</color>
 </resources>

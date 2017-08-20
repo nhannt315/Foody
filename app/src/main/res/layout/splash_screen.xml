@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorFoody"
+    android:background="@color/color_foody"
     tools:context="nhannt.foody.view.SplashScreenActivity">
 
 
@@ -25,7 +25,7 @@
         android:layout_below="@+id/img_foody"
         android:layout_centerHorizontal="true"
         android:text="@string/version_splash"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/color_white"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -37,11 +37,11 @@
         <ProgressBar
             android:layout_width="@dimen/progress_bar_size"
             android:layout_height="@dimen/progress_bar_size"
-            android:indeterminateTint="@color/colorWhite"/>
+            android:indeterminateTint="@color/color_white"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/color_white"
             android:text="@string/loading_splash"/>
     </LinearLayout>
 
@@ -53,5 +53,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/info_margin_bottom"
         android:text="@string/app_info_splash"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/color_white"/>
 </RelativeLayout>

@@ -7,4 +7,16 @@
     <dimen name="splash_logo_height">100dp</dimen>
     <dimen name="splash_logo_margin_top">165dp</dimen>
 
+    <!--Login Screen-->
+    <dimen name="login_logo_witdh">200dp</dimen>
+    <dimen name="login_logo_height">100dp</dimen>
+    <dimen name="login_logo_margin_top">100dp</dimen>
+    <dimen name="login_padding">40dp</dimen>
+    <dimen name="login_edt_margin_top">10dp</dimen>
+    <dimen name="btn_login_margin_top">15dp</dimen>
+    <dimen name="btn_login_padding_left_right">60dp</dimen>
+    <dimen name="login_drawable_padding">10dp</dimen>
+    <dimen name="option_login_margin_top">20dp</dimen>
+    <dimen name="fb_login_margin">5dp</dimen>
+    <dimen name="fb_login_padding">15dp</dimen>
 </resources>

@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">Foody</string>
-    
+    <string name="facebook_app_id">1891318747802104</string>
+
     <!--Splash Screen-->
     <string name="version_splash">Phiên bản %s</string>
     <string name="app_info_splash">nhannt</string>
     <string name="loading_splash">Đang tải</string>
+
+    <!--Login Screen-->
+    <string name="email_login">Email Đăng nhập</string>
+    <string name="login">Đăng nhập</string>
+    <string name="password_login">Mật khẩu</string>
+    <string name="or_login_by">Hoặc</string>
+    <string name="fb_login">Đăng nhập với Facebook</string>
+    <string name="gg_login">Đăng nhập với Google</string>
 </resources>
