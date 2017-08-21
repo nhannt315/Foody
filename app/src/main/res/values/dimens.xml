@@ -10,7 +10,7 @@
     <!--Login Screen-->
     <dimen name="login_logo_witdh">200dp</dimen>
     <dimen name="login_logo_height">100dp</dimen>
-    <dimen name="login_logo_margin_top">100dp</dimen>
+    <dimen name="login_logo_margin_top">80dp</dimen>
     <dimen name="login_padding">40dp</dimen>
     <dimen name="login_edt_margin_top">10dp</dimen>
     <dimen name="btn_login_margin_top">15dp</dimen>

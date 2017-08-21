@@ -48,6 +48,7 @@
             android:textColorHint="@color/color_white"/>
 
         <Button
+            android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -92,6 +93,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btn_login_google"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_white"
@@ -105,6 +107,7 @@
             android:textAllCaps="false"/>
 
         <com.facebook.login.widget.LoginButton
+            android:id="@+id/btn_login_facebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/fb_login_margin"
