@@ -1,4 +1,4 @@
-package nhannt.foody;
+package nhannt.foody.utils;
 
 import android.app.Activity;
 import android.content.Context;

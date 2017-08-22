@@ -1,4 +1,4 @@
-package nhannt.foody.view;
+package nhannt.foody.screen.splash;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -7,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import nhannt.foody.Navigator;
+import nhannt.foody.screen.BaseActivity;
+import nhannt.foody.utils.Navigator;
 import nhannt.foody.R;
+import nhannt.foody.screen.login.LoginActivity;
 
-public class SplashScreenActivity extends AppCompatActivity {
+public class SplashScreenActivity extends BaseActivity   {
     private static final long DELAY_TIME = 2000;
     private TextView mTvVersion;
     private Navigator mNavigator;
