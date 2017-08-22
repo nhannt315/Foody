@@ -7,7 +7,7 @@
     <dimen name="splash_logo_height">100dp</dimen>
     <dimen name="splash_logo_margin_top">165dp</dimen>
 
-    <!--Login Screen-->
+    <!--Login Register Screen-->
     <dimen name="login_logo_witdh">200dp</dimen>
     <dimen name="login_logo_height">100dp</dimen>
     <dimen name="login_logo_margin_top">80dp</dimen>
@@ -21,4 +21,6 @@
     <dimen name="fb_login_padding">15dp</dimen>
     <dimen name="google_login_margin">15dp</dimen>
     <dimen name="google_login_padding">10dp</dimen>
+    <dimen name="register_padding_top">80dp</dimen>
+
 </resources>

@@ -4,7 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -13,6 +19,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Arrays;
+import java.util.List;
 
 import nhannt.foody.FoodyApplication;
 import nhannt.foody.R;
@@ -25,13 +34,18 @@ public class LoginPresenter implements LoginContract.Presenter,
     GoogleApiClient.OnConnectionFailedListener, FirebaseAuth.AuthStateListener {
     private static final int GOOGLE_LOGIN_REQUEST = 1234;
     private static final int FACEBOOK_LOGIN_REQUEST = 1235;
+    private LoginContract.View mView;
     private UserRepository mUserRepository;
     private GoogleSignInOptions mSignInOptions;
     private GoogleApiClient mGoogleApiClient;
-    private LoginContract.View mView;
+    private LoginManager mFbLoginManager;
+    private CallbackManager mFbCallbackManager;
+    private List<String> mPermissionFb = Arrays.asList("email", "public_profile");
 
     public LoginPresenter(UserRepository userRepository) {
         mUserRepository = userRepository;
+        mFbLoginManager = LoginManager.getInstance();
+        mFbCallbackManager = CallbackManager.Factory.create();
     }
 
     @Override
@@ -85,11 +99,30 @@ public class LoginPresenter implements LoginContract.Presenter,
     }
 
     @Override
-    public void loginFacebook() {
+    public void loginFacebook(Context context) {
+        mFbLoginManager.logInWithReadPermissions((AppCompatActivity) context, mPermissionFb);
+        mFbLoginManager.registerCallback(mFbCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.d("Facebook Login", "Success");
+                String tokenId = loginResult.getAccessToken().getToken();
+                mUserRepository.loginFacebook(tokenId);
+            }
+
+            @Override
+            public void onCancel() {
+                Log.d("Facebook Login", "Cancel");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d("Facebook Login", "Error");
+            }
+        });
     }
 
     @Override
-    public void handleResult(int requestCode, Intent data) {
+    public void handleResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case GOOGLE_LOGIN_REQUEST:
                 GoogleSignInResult signInResult = Auth.GoogleSignInApi
@@ -97,9 +130,11 @@ public class LoginPresenter implements LoginContract.Presenter,
                 GoogleSignInAccount signInAccount = signInResult.getSignInAccount();
                 mUserRepository.loginGoogle(signInAccount.getIdToken());
                 break;
-            case FACEBOOK_LOGIN_REQUEST:
+            default:
+                mFbCallbackManager.onActivityResult(requestCode, resultCode, data);
                 break;
         }
+        mView.showProgressBar();
     }
 
     @Override
@@ -111,6 +146,7 @@ public class LoginPresenter implements LoginContract.Presenter,
     public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
+            mView.hideProgressBar();
             mView.onLoginSuccess();
         }
     }

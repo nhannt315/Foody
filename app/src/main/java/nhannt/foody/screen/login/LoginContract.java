@@ -29,7 +29,7 @@ public class LoginContract {
         void createGoogleClient(Context context);
         void loginGoogle();
         void loginEmail();
-        void loginFacebook();
-        void handleResult(int requestCode, Intent data);
+        void loginFacebook(Context context);
+        void handleResult(int requestCode, int resultCode, Intent data);
     }
 }

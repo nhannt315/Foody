@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".screen.home.HomeActivity">
         </activity>
+        <activity android:name=".screen.register.RegisterActivity">
+        </activity>
     </application>
 
 </manifest>
