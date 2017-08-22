@@ -6,5 +6,6 @@
 
     <color name="color_foody">#cd2027</color>
     <color name="color_white">#fff</color>
-    <color name="transparent_bg_login">#80cd2027</color>
+    <color name="transparent_bg_login">#66000000</color>
+    <color name="color_facebook">#189aca</color>
 </resources>

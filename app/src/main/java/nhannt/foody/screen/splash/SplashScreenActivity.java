@@ -32,6 +32,7 @@ public class SplashScreenActivity extends BaseActivity   {
             @Override
             public void run() {
                 mNavigator.startActivity(LoginActivity.class);
+                finish();
             }
         }, DELAY_TIME);
     }

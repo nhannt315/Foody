@@ -19,4 +19,6 @@
     <dimen name="option_login_margin_top">20dp</dimen>
     <dimen name="fb_login_margin">5dp</dimen>
     <dimen name="fb_login_padding">15dp</dimen>
+    <dimen name="google_login_margin">15dp</dimen>
+    <dimen name="google_login_padding">10dp</dimen>
 </resources>

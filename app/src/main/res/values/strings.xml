@@ -14,4 +14,6 @@
     <string name="or_login_by">Hoặc</string>
     <string name="fb_login">Đăng nhập với Facebook</string>
     <string name="gg_login">Đăng nhập với Google</string>
+    <string name="forgot_pass">Quên mật khẩu</string>
+    <string name="register">Đăng ký mới</string>
 </resources>

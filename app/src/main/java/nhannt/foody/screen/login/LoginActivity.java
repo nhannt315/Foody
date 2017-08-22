@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.facebook.login.widget.LoginButton;
 
 import nhannt.foody.data.source.UserRepository;
 import nhannt.foody.data.source.remote.UserRemoteDataSource;
@@ -15,8 +16,8 @@ import nhannt.foody.screen.home.HomeActivity;
 import nhannt.foody.utils.Navigator;
 import nhannt.foody.R;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener, LoginContract
-    .View {
+public class LoginActivity extends BaseActivity
+    implements View.OnClickListener, LoginContract.View {
     private Navigator mNavigator;
     private LoginContract.Presenter mPresenter;
     private Button mBtnLoginGoogle;
@@ -57,7 +58,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            Log.d("Google", "Handle result");
             mPresenter.handleResult(requestCode, data);
         }
     }
@@ -73,9 +73,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void sendLoginIntent(int requestCode, Intent iGoogleLogin) {
-        Log.d("Google","Send login intent");
         mNavigator.startActivityForResult(iGoogleLogin, requestCode);
-
     }
 
     @Override
