@@ -44,6 +44,11 @@ public class UserRepository
     }
 
     @Override
+    public void sendPasswordResetEmail(String email, OnCompleteListener listener) {
+        mRemoteDataSource.sendPasswordResetEmail(email, listener);
+    }
+
+    @Override
     public void registerUser(String email, String password, OnCompleteListener listener) {
         mRemoteDataSource.registerUser(email, password, listener);
     }

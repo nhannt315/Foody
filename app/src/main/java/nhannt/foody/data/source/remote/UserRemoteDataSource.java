@@ -49,6 +49,11 @@ public class UserRemoteDataSource implements UserDataSource.RemoteDataSource {
     }
 
     @Override
+    public void sendPasswordResetEmail(String email, OnCompleteListener listener) {
+        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(listener);
+    }
+
+    @Override
     public void registerUser(String email, String password, OnCompleteListener listener) {
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(listener);
     }

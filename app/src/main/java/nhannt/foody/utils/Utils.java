@@ -14,4 +14,11 @@ public class Utils {
             .setContentText(message)
             .show();
     }
+
+    public static void showSuccessDialog(Context context, String title, String message){
+        new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
+            .setTitleText(title)
+            .setContentText(message)
+            .show();
+    }
 }
