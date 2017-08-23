@@ -15,7 +15,7 @@ public interface LoginContract {
      */
     interface View extends BaseView {
         void sendLoginIntent(int requestCode, Intent iGoogleLogin);
-        void onLoginError();
+        void onLoginError(String message);
         void onLoginSuccess();
         void showProgressBar();
         void hideProgressBar();
@@ -30,6 +30,7 @@ public interface LoginContract {
         void loginGoogle();
         void loginEmail();
         void loginFacebook(Context context);
+        void loginEmail(String email, String password);
         void handleResult(int requestCode, int resultCode, Intent data);
     }
 }

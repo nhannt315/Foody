@@ -29,6 +29,11 @@ public class UserRepository
     }
 
     @Override
+    public void loginEmail(String email, String password, OnCompleteListener listener) {
+        mRemoteDataSource.loginEmail(email, password, listener);
+    }
+
+    @Override
     public void loginGoogle(String tokenId) {
         mRemoteDataSource.loginGoogle(tokenId);
     }

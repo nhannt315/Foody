@@ -27,6 +27,7 @@
         Mật khẩu chỉ được bao gồm số và chữ,ít nhất 1 kí tự hoa và từ 6 đến 20 kí tự
     </string>
     <string name="register_success">Đăng ký thành công!</string>
+    <string name="login_error">Đăng nhập thất bại,vui lòng kiểm tra lại email và mật khẩu</string>
 
 
 </resources>

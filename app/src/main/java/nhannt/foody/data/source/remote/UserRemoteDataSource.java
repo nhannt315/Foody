@@ -1,12 +1,8 @@
 package nhannt.foody.data.source.remote;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,6 +29,11 @@ public class UserRemoteDataSource implements UserDataSource.RemoteDataSource {
     @Override
     public void unregisterAuthListener(FirebaseAuth.AuthStateListener listener) {
         mAuth.removeAuthStateListener(listener);
+    }
+
+    @Override
+    public void loginEmail(String email, String password, OnCompleteListener listener) {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(listener);
     }
 
     @Override

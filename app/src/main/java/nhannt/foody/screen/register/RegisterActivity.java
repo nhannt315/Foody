@@ -84,7 +84,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onRegisterError(String message) {
-        Utils.showErrorDialog(this, getString(R.string.error), message);
+            Utils.showErrorDialog(this, getString(R.string.error), message);
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import nhannt.foody.screen.home.HomeActivity;
 import nhannt.foody.screen.register.RegisterActivity;
 import nhannt.foody.utils.Navigator;
 import nhannt.foody.R;
+import nhannt.foody.utils.Utils;
 
 public class LoginActivity extends BaseActivity
     implements View.OnClickListener, LoginContract.View {
@@ -25,8 +27,11 @@ public class LoginActivity extends BaseActivity
     private LoginContract.Presenter mPresenter;
     private Button mBtnLoginGoogle;
     private Button mBtnLoginFacebook;
+    private Button mBtnLogin;
     private TextView mTvRegister;
     private TextView mTvForgotPass;
+    private EditText mEdtEmail;
+    private EditText mEdtPassword;
     private RelativeLayout mLoadingBar;
 
     @Override
@@ -58,13 +63,17 @@ public class LoginActivity extends BaseActivity
         mBtnLoginFacebook.setOnClickListener(this);
         mTvForgotPass.setOnClickListener(this);
         mTvRegister.setOnClickListener(this);
+        mBtnLogin.setOnClickListener(this);
     }
 
     private void initViews() {
         mBtnLoginGoogle = (Button) findViewById(R.id.btn_login_google);
         mBtnLoginFacebook = (Button) findViewById(R.id.btn_login_facebook);
+        mBtnLogin = (Button) findViewById(R.id.btn_login);
         mTvRegister = (TextView) findViewById(R.id.tv_register);
         mTvForgotPass = (TextView) findViewById(R.id.tv_forgot_pass);
+        mEdtEmail = (EditText) findViewById(R.id.edt_email_login);
+        mEdtPassword = (EditText) findViewById(R.id.edt_password_login);
         mLoadingBar = (RelativeLayout) findViewById(R.id.rl_loading_login);
     }
 
@@ -85,6 +94,11 @@ public class LoginActivity extends BaseActivity
             case R.id.btn_login_facebook:
                 mPresenter.loginFacebook(this);
                 break;
+            case R.id.btn_login:
+                String email = mEdtEmail.getText().toString().trim();
+                String password = mEdtPassword.getText().toString().trim();
+                mPresenter.loginEmail(email, password);
+                break;
             case R.id.tv_forgot_pass:
                 break;
             case R.id.tv_register:
@@ -99,7 +113,8 @@ public class LoginActivity extends BaseActivity
     }
 
     @Override
-    public void onLoginError() {
+    public void onLoginError(String message) {
+        Utils.showErrorDialog(this, getString(R.string.error), message);
     }
 
     @Override

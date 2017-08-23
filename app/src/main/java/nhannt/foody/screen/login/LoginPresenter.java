@@ -17,6 +17,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -26,6 +28,7 @@ import java.util.List;
 import nhannt.foody.FoodyApplication;
 import nhannt.foody.R;
 import nhannt.foody.data.source.UserRepository;
+import nhannt.foody.utils.Validators;
 
 /**
  * Created by nhannt on 21/08/2017.
@@ -117,6 +120,36 @@ public class LoginPresenter implements LoginContract.Presenter,
             @Override
             public void onError(FacebookException error) {
                 Log.d("Facebook Login", "Error");
+            }
+        });
+    }
+
+    @Override
+    public void loginEmail(String email, String password) {
+        if (email.length() == 0
+            || password.length() == 0) {
+            mView.onLoginError(
+                FoodyApplication.getAppContext().getString(R.string.please_fill_all)
+            );
+            return;
+        }
+        if (!Validators.validateEmail(email.trim())) {
+            mView.onLoginError(
+                FoodyApplication.getAppContext().getString(R.string.please_type_right_email)
+            );
+        }
+        mView.showProgressBar();
+        mUserRepository.loginEmail(email, password, new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                mView.hideProgressBar();
+                if (task.isSuccessful()) {
+                    mView.onLoginSuccess();
+                } else {
+                    mView.onLoginError(
+                        FoodyApplication.getAppContext().getString(R.string.login_error)
+                    );
+                }
             }
         });
     }
