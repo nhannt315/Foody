@@ -3,7 +3,10 @@ package nhannt.foody.data.source.remote;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,6 +45,11 @@ public class UserRemoteDataSource implements UserDataSource.RemoteDataSource {
     public void loginFacebook(String tokenId) {
         AuthCredential credential = FacebookAuthProvider.getCredential(tokenId);
         mAuth.signInWithCredential(credential);
+    }
+
+    @Override
+    public void registerUser(String email, String password, OnCompleteListener listener) {
+        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(listener);
     }
 
     @Override

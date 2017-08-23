@@ -9,7 +9,7 @@ import nhannt.foody.screen.BaseView;
 /**
  * Created by nhannt on 21/08/2017.
  */
-public class LoginContract {
+public interface LoginContract {
     /*
     View
      */

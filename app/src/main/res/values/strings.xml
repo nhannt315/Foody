@@ -3,6 +3,8 @@
     <string name="facebook_app_id">1891318747802104</string>
     <string name="fb_login_protocol_scheme">fb1891318747802104</string>
 
+    <string name="error">Lỗi</string>
+
     <!--Splash Screen-->
     <string name="version_splash">Phiên bản %s</string>
     <string name="app_info_splash">nhannt</string>
@@ -18,6 +20,13 @@
     <string name="forgot_pass">Quên mật khẩu</string>
     <string name="register">Đăng ký</string>
     <string name="retype_password">Nhập lại mật khẩu</string>
+    <string name="please_fill_all">Vui lòng nhập tất cả các trường</string>
+    <string name="two_pass_must_match">Hai mật khẩu phải trùng nhau</string>
+    <string name="please_type_right_email">Xin vui lòng nhập đúng định dạng email</string>
+    <string name="password_error">
+        Mật khẩu chỉ được bao gồm số và chữ,ít nhất 1 kí tự hoa và từ 6 đến 20 kí tự
+    </string>
+    <string name="register_success">Đăng ký thành công!</string>
 
 
 </resources>

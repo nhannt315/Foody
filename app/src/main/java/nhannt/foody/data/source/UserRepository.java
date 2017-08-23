@@ -1,5 +1,6 @@
 package nhannt.foody.data.source;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -35,6 +36,11 @@ public class UserRepository
     @Override
     public void loginFacebook(String tokenId) {
         mRemoteDataSource.loginFacebook(tokenId);
+    }
+
+    @Override
+    public void registerUser(String email, String password, OnCompleteListener listener) {
+        mRemoteDataSource.registerUser(email, password, listener);
     }
 
     @Override

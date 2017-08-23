@@ -33,9 +33,9 @@
             android:drawableLeft="@drawable/ic_perm_identity_white_24dp"
             android:drawablePadding="@dimen/login_drawable_padding"
             android:hint="@string/email_login"
+            android:inputType="textEmailAddress"
             android:textColor="@color/color_white"
             android:textColorHint="@color/color_white"/>
-
         <EditText
             android:id="@+id/edt_password_register"
             android:layout_width="match_parent"
@@ -62,7 +62,7 @@
             android:textColorHint="@color/color_white"/>
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -75,4 +75,15 @@
 
 
     </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/rl_loading_register"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/transparent_bg_login">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
 </RelativeLayout>
