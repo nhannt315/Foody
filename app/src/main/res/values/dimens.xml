@@ -28,5 +28,9 @@
     <dimen name="sp_30">30sp</dimen>
 
     <!--Tool bar-->
-    <dimen name="logo_height_width">24dp</dimen>
+    <dimen name="logo_height_width_toolbar">24dp</dimen>
+    <dimen name="icon_add_margin_right_toolbar">5dp</dimen>
+    <dimen name="radio_button_padding_toolbar">10dp</dimen>
+    <!--Home-->
+    <dimen name="menu_padding_top_bottom_home">5dp</dimen>
 </resources>

@@ -4,6 +4,7 @@
     <string name="fb_login_protocol_scheme">fb1891318747802104</string>
 
     <string name="error">Lỗi</string>
+    <string name="agree">Đồng ý</string>
 
     <!--Splash Screen-->
     <string name="version_splash">Phiên bản %s</string>
@@ -46,6 +47,19 @@
     </string>
 
     <!--Toolbar-->
-    <string name="what_to_eat">Ăn gì</string>
+    <string name="what_to_eat">Ăn gì ?</string>
     <string name="where_to_eat">Ở đâu</string>
+
+    <!--Home-->
+    <string name="newest">Mới nhất</string>
+    <string name="category">Danh mục</string>
+    <string name="area">Hà Nội</string>
+
+    <string name="nearby">Gần đây</string>
+    <string name="order_delivery">Giao hàng</string>
+    <string name="reviews">Đánh giá</string>
+    <string name="game_and_fun">Game and Fun</string>
+    <string name="blogs">Bài viết</string>
+    <string name="top_members">Top thành viên</string>
 </resources>
+
