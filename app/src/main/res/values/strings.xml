@@ -61,5 +61,8 @@
     <string name="game_and_fun">Game and Fun</string>
     <string name="blogs">Bài viết</string>
     <string name="top_members">Top thành viên</string>
+
+    <!--WhereEat-->
+    <string name="order">Đặt món</string>
 </resources>
 

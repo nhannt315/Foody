@@ -14,7 +14,7 @@ import nhannt.foody.screen.BaseFragment;
  * Created by nhannt on 09/11/2017.
  */
 
-public class WhereToEatFragment extends BaseFragment {
+public class WhereToEatFragment extends BaseFragment implements WhereEatContract.View {
 
     @Nullable
     @Override
