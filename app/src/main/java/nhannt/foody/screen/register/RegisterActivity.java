@@ -14,6 +14,8 @@ import nhannt.foody.R;
 import nhannt.foody.data.source.UserRepository;
 import nhannt.foody.data.source.remote.UserRemoteDataSource;
 import nhannt.foody.screen.BaseActivity;
+import nhannt.foody.screen.home.HomeActivity;
+import nhannt.foody.utils.Navigator;
 import nhannt.foody.utils.Utils;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener,
@@ -22,6 +24,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private EditText mEdtEmail, mEdtPass, mEdtRePass;
     private RegisterContract.Presenter mPresenter;
     private RelativeLayout mRlLoading;
+    private Navigator mNavigator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initOther() {
+        mNavigator = new Navigator(this);
         mPresenter = new RegisterPresenter(
             new UserRepository(null, new UserRemoteDataSource())
         );
@@ -80,6 +84,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onRegisterSuccess() {
         Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_SHORT).show();
+        mNavigator.startActivity(HomeActivity.class);
     }
 
     @Override

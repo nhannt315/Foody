@@ -7,7 +7,10 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import nhannt.foody.data.model.Member;
 import nhannt.foody.data.source.UserDataSource;
 
 /**
@@ -16,9 +19,11 @@ import nhannt.foody.data.source.UserDataSource;
 public class UserRemoteDataSource implements UserDataSource.RemoteDataSource {
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mDataMember;
 
     public UserRemoteDataSource(){
         mAuth = FirebaseAuth.getInstance();
+        mDataMember = FirebaseDatabase.getInstance().getReference().child("thanhviens");
     }
 
     @Override
@@ -51,6 +56,11 @@ public class UserRemoteDataSource implements UserDataSource.RemoteDataSource {
     @Override
     public void sendPasswordResetEmail(String email, OnCompleteListener listener) {
         mAuth.sendPasswordResetEmail(email).addOnCompleteListener(listener);
+    }
+
+    @Override
+    public void updateUserInfo(String UID, String name, String imagePath) {
+        mDataMember.child(UID).setValue(new Member(name, imagePath));
     }
 
     @Override

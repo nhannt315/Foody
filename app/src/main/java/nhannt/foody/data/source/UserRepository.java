@@ -49,6 +49,11 @@ public class UserRepository
     }
 
     @Override
+    public void updateUserInfo(String UID, String name, String imagePath) {
+        mRemoteDataSource.updateUserInfo(UID, name, imagePath);
+    }
+
+    @Override
     public void registerUser(String email, String password, OnCompleteListener listener) {
         mRemoteDataSource.registerUser(email, password, listener);
     }

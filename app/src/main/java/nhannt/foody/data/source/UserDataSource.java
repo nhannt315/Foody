@@ -18,6 +18,7 @@ public interface UserDataSource {
         void loginGoogle(String tokenId);
         void loginFacebook(String tokenId);
         void sendPasswordResetEmail(String email, OnCompleteListener listener);
+        void updateUserInfo(String UID, String name, String imagePath);
         void registerUser(String email, String password, OnCompleteListener listener);
         FirebaseUser getCurrentUser();
         boolean checkLogin();
