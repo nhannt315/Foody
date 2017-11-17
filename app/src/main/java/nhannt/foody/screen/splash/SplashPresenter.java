@@ -65,8 +65,8 @@ public class SplashPresenter implements SplashContract.Presenter, GoogleApiClien
             Location currentLocation = LocationServices.FusedLocationApi.getLastLocation
                 (mGoogleApiClient);
             if (currentLocation != null) {
-                mLocationRepository.saveLocation((float) currentLocation.getLongitude(),
-                    (float) currentLocation.getLatitude());
+                mLocationRepository.saveLocation(currentLocation.getLongitude(),
+                    currentLocation.getLatitude());
             }
         }
         mView.navigateToLogin();

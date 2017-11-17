@@ -2,6 +2,7 @@ package nhannt.foody.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.AsyncTask;
 
 import nhannt.foody.FoodyApplication;
@@ -20,10 +21,10 @@ public class LocationRepository {
             (LOCATION_SHARE_PREF_KEY, Context.MODE_PRIVATE);
     }
 
-    public void saveLocation(float longitude, float latitude) {
+    public void saveLocation(double longitude, double latitude) {
         final SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putFloat(LATITUDE_SHARE_PREF_KEY, latitude);
-        editor.putFloat(LONGITUDE_SHARE_PREF_KEY, longitude);
+        editor.putString(LATITUDE_SHARE_PREF_KEY, String.valueOf(latitude));
+        editor.putString(LONGITUDE_SHARE_PREF_KEY, String.valueOf(longitude));
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -33,11 +34,18 @@ public class LocationRepository {
         }.execute();
     }
 
-    public float getCurrentLongitude() {
-        return mSharedPreferences.getFloat(LONGITUDE_SHARE_PREF_KEY, 0);
+    public String getCurrentLongitude() {
+        return mSharedPreferences.getString(LONGITUDE_SHARE_PREF_KEY, "0");
     }
 
-    public float getCurrentLatitude() {
-        return mSharedPreferences.getFloat(LATITUDE_SHARE_PREF_KEY, 0);
+    public String getCurrentLatitude() {
+        return mSharedPreferences.getString(LATITUDE_SHARE_PREF_KEY, "0");
+    }
+
+    public Location getCurrentLocation(){
+        Location location = new Location("");
+        location.setLatitude(Double.parseDouble(getCurrentLatitude()));
+        location.setLongitude(Double.parseDouble(getCurrentLongitude()));
+        return location;
     }
 }

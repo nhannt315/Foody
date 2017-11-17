@@ -44,10 +44,12 @@
                     android:id="@+id/tv_place_address_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
                     android:text="36 Triệu Quang Phục - Quận 3"/>
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_distance_place_item"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="bottom"

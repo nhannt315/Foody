@@ -1,5 +1,7 @@
 package nhannt.foody.screen.eat_where;
 
+import android.location.Location;
+
 import java.util.ArrayList;
 
 import nhannt.foody.data.model.Place;
@@ -20,5 +22,6 @@ public interface WhereEatContract {
 
     interface Presenter extends BasePresenter<View>{
         void getListPlace();
+        Location getCurrentLocation();
     }
 }

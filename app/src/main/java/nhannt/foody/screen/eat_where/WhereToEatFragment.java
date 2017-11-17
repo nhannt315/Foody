@@ -1,5 +1,6 @@
 package nhannt.foody.screen.eat_where;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 
 import nhannt.foody.R;
+import nhannt.foody.data.LocationRepository;
 import nhannt.foody.data.model.Place;
 import nhannt.foody.data.source.PlaceRepository;
 import nhannt.foody.data.source.remote.PlaceRemoteDataSource;
@@ -26,6 +28,7 @@ public class WhereToEatFragment extends BaseFragment implements WhereEatContract
     private RecyclerView mRvListPlace;
     private PlaceRecyclerViewAdapter mAdapter;
     private ProgressBar mProgressBar;
+    private Location mCurrentLocation;
 
     @Nullable
     @Override
@@ -38,10 +41,12 @@ public class WhereToEatFragment extends BaseFragment implements WhereEatContract
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter = new WhereEatPresenter(new PlaceRepository(null, new PlaceRemoteDataSource()));
+        mPresenter = new WhereEatPresenter(new PlaceRepository(null, new PlaceRemoteDataSource()
+        ), new LocationRepository());
         mPresenter.setView(this);
         initViews();
         mPresenter.getListPlace();
+        mCurrentLocation = mPresenter.getCurrentLocation();
     }
 
     private void initViews() {
@@ -49,6 +54,7 @@ public class WhereToEatFragment extends BaseFragment implements WhereEatContract
         mRvListPlace = getView().findViewById(R.id.rv_where_eat);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRvListPlace.setLayoutManager(layoutManager);
+        mRvListPlace.setNestedScrollingEnabled(false);
     }
 
     @Override

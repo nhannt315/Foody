@@ -21,6 +21,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.List;
 
 import nhannt.foody.R;
+import nhannt.foody.data.model.Branch;
 import nhannt.foody.data.model.Comment;
 import nhannt.foody.data.model.Place;
 import nhannt.foody.widgets.CircleImageView;
@@ -95,6 +96,18 @@ public class PlaceRecyclerViewAdapter
             holder.mTvTotalImage.setText(totalImageComment + "");
         } else {
         }
+        if (place.getLstBranch().size() > 0) {
+            Branch closetBranch = null;
+            double distance = -1;
+            for (Branch branch : place.getLstBranch()) {
+                if (distance < branch.getDistanceToCurrent()) {
+                    distance = branch.getDistanceToCurrent();
+                    closetBranch = branch;
+                }
+            }
+            holder.mTvAddress.setText(closetBranch.getDiachi());
+            holder.mDistance.setText(String.format("%.1f km", distance));
+        }
     }
 
     private void loadImageUser(final CircleImageView circleImageView, Comment comment) {
@@ -119,7 +132,7 @@ public class PlaceRecyclerViewAdapter
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTvPlaceName, mTvAddress, mTvTitleComment1, mTvTitleComment2, mTvContentComment1,
             mTvContentComment2, mTvRateComment1, mTvRateComment2, mTvTotalComment, mTvTotalImage,
-            mTvAvgPoint;
+            mTvAvgPoint, mDistance;
         Button mBtnOrder;
         ImageView mImgPlace;
         CircleImageView mImgUser1, mImgUser2;
@@ -144,6 +157,7 @@ public class PlaceRecyclerViewAdapter
             mTvTotalComment = itemView.findViewById(R.id.tv_total_comment);
             mTvTotalImage = itemView.findViewById(R.id.tv_total_image);
             mTvAvgPoint = itemView.findViewById(R.id.tv_avg_point_place);
+            mDistance = itemView.findViewById(R.id.tv_distance_place_item);
         }
     }
 }

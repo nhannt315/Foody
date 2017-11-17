@@ -16,8 +16,17 @@ public class Place {
     private ArrayList<String> hinhanhquanan;
     private ArrayList<Comment> binhluanList;
     private long luotthich;
+    private ArrayList<Branch> lstBranch;
 
     public Place() {
+    }
+
+    public ArrayList<Branch> getLstBranch() {
+        return lstBranch;
+    }
+
+    public void setLstBranch(ArrayList<Branch> lstBranch) {
+        this.lstBranch = lstBranch;
     }
 
     public ArrayList<Comment> getBinhluanList() {
