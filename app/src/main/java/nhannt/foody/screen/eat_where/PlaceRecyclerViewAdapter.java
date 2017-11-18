@@ -1,7 +1,12 @@
 package nhannt.foody.screen.eat_where;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,10 +15,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -24,6 +35,8 @@ import nhannt.foody.R;
 import nhannt.foody.data.model.Branch;
 import nhannt.foody.data.model.Comment;
 import nhannt.foody.data.model.Place;
+import nhannt.foody.screen.placedetail.PlaceDetailActivity;
+import nhannt.foody.utils.Navigator;
 import nhannt.foody.widgets.CircleImageView;
 
 /**
@@ -49,7 +62,7 @@ public class PlaceRecyclerViewAdapter
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Place place = mData.get(position);
+        final Place place = mData.get(position);
         holder.mTvPlaceName.setText(place.getTenquanan());
         if (place.isGiaohang()) {
             holder.mBtnOrder.setVisibility(View.VISIBLE);
@@ -63,9 +76,29 @@ public class PlaceRecyclerViewAdapter
             storageImage.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
+                    holder.mProgressBar.setVisibility(View.VISIBLE);
                     Glide.with(mContext)
                         .load(uri.toString())
-                        .apply(new RequestOptions().placeholder(R.drawable.bg_login))
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model,
+                                                        Target<Drawable> target,
+                                                        boolean isFirstResource) {
+                                holder.mProgressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model,
+                                                           Target<Drawable> target,
+                                                           DataSource dataSource,
+                                                           boolean isFirstResource) {
+                                holder.mProgressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+                        })
+                        .apply(new RequestOptions().placeholder(R.drawable.error)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL))
                         .into(holder.mImgPlace);
                 }
             });
@@ -108,6 +141,15 @@ public class PlaceRecyclerViewAdapter
             holder.mTvAddress.setText(closetBranch.getDiachi());
             holder.mDistance.setText(String.format("%.1f km", distance));
         }
+        holder.mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigator navigator = new Navigator((Activity) mContext);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("place", place);
+                navigator.startActivity(PlaceDetailActivity.class, bundle);
+            }
+        });
     }
 
     private void loadImageUser(final CircleImageView circleImageView, Comment comment) {
@@ -137,6 +179,8 @@ public class PlaceRecyclerViewAdapter
         ImageView mImgPlace;
         CircleImageView mImgUser1, mImgUser2;
         LinearLayout mLlComment1, mLlComment2;
+        ProgressBar mProgressBar;
+        CardView mCardView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -158,6 +202,8 @@ public class PlaceRecyclerViewAdapter
             mTvTotalImage = itemView.findViewById(R.id.tv_total_image);
             mTvAvgPoint = itemView.findViewById(R.id.tv_avg_point_place);
             mDistance = itemView.findViewById(R.id.tv_distance_place_item);
+            mProgressBar = itemView.findViewById(R.id.progress_bar);
+            mCardView = itemView.findViewById(R.id.card_view_where_eat_item);
         }
     }
 }

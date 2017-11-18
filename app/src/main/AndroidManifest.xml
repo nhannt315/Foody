@@ -35,6 +35,8 @@
         </activity>
         <activity android:name=".screen.resetpassword.ResetPasswordActivity">
         </activity>
+        <activity android:name=".screen.placedetail.PlaceDetailActivity">
+        </activity>
     </application>
 
 </manifest>

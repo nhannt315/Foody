@@ -1,11 +1,15 @@
 package nhannt.foody.data.model;
 
+import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 /**
  * Created by nhannt on 09/11/2017.
  */
-public class Place {
+public class Place implements Parcelable {
     private boolean giaohang;
     private String maquanan;
     private String giomocua;
@@ -17,8 +21,44 @@ public class Place {
     private ArrayList<Comment> binhluanList;
     private long luotthich;
     private ArrayList<Branch> lstBranch;
+    private ArrayList<Bitmap> lstImageBitmap;
 
     public Place() {
+    }
+
+    protected Place(Parcel in) {
+        giaohang = in.readByte() != 0;
+        maquanan = in.readString();
+        giomocua = in.readString();
+        giodongcua = in.readString();
+        tenquanan = in.readString();
+        videogioithieu = in.readString();
+        tienich = in.createStringArrayList();
+        hinhanhquanan = in.createStringArrayList();
+        luotthich = in.readLong();
+        lstImageBitmap = in.createTypedArrayList(Bitmap.CREATOR);
+        lstBranch = in.createTypedArrayList(Branch.CREATOR);
+        binhluanList = in.createTypedArrayList(Comment.CREATOR);
+    }
+
+    public static final Creator<Place> CREATOR = new Creator<Place>() {
+        @Override
+        public Place createFromParcel(Parcel in) {
+            return new Place(in);
+        }
+
+        @Override
+        public Place[] newArray(int size) {
+            return new Place[size];
+        }
+    };
+
+    public ArrayList<Bitmap> getLstImageBitmap() {
+        return lstImageBitmap;
+    }
+
+    public void setLstImageBitmap(ArrayList<Bitmap> lstImageBitmap) {
+        this.lstImageBitmap = lstImageBitmap;
     }
 
     public ArrayList<Branch> getLstBranch() {
@@ -107,5 +147,26 @@ public class Place {
 
     public void setTienich(ArrayList<String> tienich) {
         this.tienich = tienich;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte((byte) (giaohang ? 1 : 0));
+        dest.writeString(maquanan);
+        dest.writeString(giomocua);
+        dest.writeString(giodongcua);
+        dest.writeString(tenquanan);
+        dest.writeString(videogioithieu);
+        dest.writeStringList(tienich);
+        dest.writeStringList(hinhanhquanan);
+        dest.writeLong(luotthich);
+        dest.writeTypedList(lstImageBitmap);
+        dest.writeTypedList(lstBranch);
+        dest.writeTypedList(binhluanList);
     }
 }

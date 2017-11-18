@@ -1,9 +1,12 @@
 package nhannt.foody.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by nhannt on 09/11/2017.
  */
-public class Member {
+public class Member implements Parcelable {
     private String hoten,hinhanh,mathanhvien;
 
     public Member() {
@@ -19,6 +22,36 @@ public class Member {
         this.hinhanh = hinhanh;
         this.mathanhvien = mathanhvien;
     }
+
+    protected Member(Parcel in) {
+        hoten = in.readString();
+        hinhanh = in.readString();
+        mathanhvien = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(hoten);
+        dest.writeString(hinhanh);
+        dest.writeString(mathanhvien);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Member> CREATOR = new Creator<Member>() {
+        @Override
+        public Member createFromParcel(Parcel in) {
+            return new Member(in);
+        }
+
+        @Override
+        public Member[] newArray(int size) {
+            return new Member[size];
+        }
+    };
 
     public String getHoten() {
         return hoten;

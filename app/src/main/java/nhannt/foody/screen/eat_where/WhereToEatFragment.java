@@ -4,8 +4,10 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +30,10 @@ public class WhereToEatFragment extends BaseFragment implements WhereEatContract
     private RecyclerView mRvListPlace;
     private PlaceRecyclerViewAdapter mAdapter;
     private ProgressBar mProgressBar;
+    private NestedScrollView mNestedScrollView;
     private Location mCurrentLocation;
+    private ArrayList<Place> mListPlace;
+    private boolean mIsLoading = false;
 
     @Nullable
     @Override
@@ -45,6 +50,7 @@ public class WhereToEatFragment extends BaseFragment implements WhereEatContract
         ), new LocationRepository());
         mPresenter.setView(this);
         initViews();
+        mIsLoading = true;
         mPresenter.getListPlace();
         mCurrentLocation = mPresenter.getCurrentLocation();
     }
@@ -52,9 +58,27 @@ public class WhereToEatFragment extends BaseFragment implements WhereEatContract
     private void initViews() {
         mProgressBar = getView().findViewById(R.id.progress_bar);
         mRvListPlace = getView().findViewById(R.id.rv_where_eat);
+        mNestedScrollView = getView().findViewById(R.id.nested_scroll_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRvListPlace.setLayoutManager(layoutManager);
         mRvListPlace.setNestedScrollingEnabled(false);
+        mListPlace = new ArrayList<>();
+        mAdapter = new PlaceRecyclerViewAdapter(getContext(), mListPlace);
+        mRvListPlace.setAdapter(mAdapter);
+        mNestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX,
+                                       int oldScrollY) {
+                if (mIsLoading)
+                    return;
+                if (v.getChildAt(v.getChildCount() - 1) != null) {
+                    if (scrollY >= (v.getChildAt(v.getChildCount() - 1)).getMeasuredHeight() - v
+                        .getMeasuredHeight()) {
+                        mPresenter.getListPlace();
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -64,9 +88,16 @@ public class WhereToEatFragment extends BaseFragment implements WhereEatContract
     }
 
     @Override
+    public int getLoadedItemCount() {
+        return mListPlace.size();
+    }
+
+    @Override
     public void setListPlace(ArrayList<Place> listPlace) {
-        mAdapter = new PlaceRecyclerViewAdapter(getContext(), listPlace);
-        mRvListPlace.setAdapter(mAdapter);
+        mListPlace.addAll(listPlace);
+        Log.d("count", getLoadedItemCount() + "");
+        mAdapter.notifyDataSetChanged();
+        mIsLoading = false;
     }
 
     @Override

@@ -20,7 +20,8 @@ public class PlaceRepository implements PlaceDataSource.RemoteDataSource, PlaceD
     }
 
     @Override
-    public void getListPlace(OnLoadListItemListener<Place> listener) {
-        mRemoteDataSource.getListPlace(listener);
+    public void getListPlace(OnLoadListItemListener<Place> listener,int nextItemCount,
+                             int totalLoadedItem) {
+        mRemoteDataSource.getListPlace(listener, nextItemCount, totalLoadedItem);
     }
 }

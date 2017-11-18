@@ -18,6 +18,7 @@ public interface WhereEatContract {
         void showProgress();
         void hideProgress();
         void onGetListFailed();
+        int getLoadedItemCount();
     }
 
     interface Presenter extends BasePresenter<View>{

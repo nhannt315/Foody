@@ -45,7 +45,7 @@ public class SplashScreenActivity extends BaseActivity implements SplashContract
     public void requireLocationPermission() {
         if (!checkLocationPermission()) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission
-                .ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
+                .ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
         } else {
         }
     }
@@ -53,8 +53,11 @@ public class SplashScreenActivity extends BaseActivity implements SplashContract
     @Override
     public boolean checkLocationPermission() {
         int checkPermissionCoarseLocation = ContextCompat.checkSelfPermission(this, Manifest
+            .permission.ACCESS_COARSE_LOCATION);
+        int checkPermissionFineLocation = ContextCompat.checkSelfPermission(this, Manifest
             .permission.ACCESS_FINE_LOCATION);
-        return checkPermissionCoarseLocation == PackageManager.PERMISSION_GRANTED;
+        return checkPermissionCoarseLocation == PackageManager.PERMISSION_GRANTED &&
+            checkPermissionFineLocation == PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
@@ -65,7 +68,6 @@ public class SplashScreenActivity extends BaseActivity implements SplashContract
             case REQUEST_LOCATION_PERMISSION:
                 if (grantResults.length > 0 &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                 }
                 break;
         }

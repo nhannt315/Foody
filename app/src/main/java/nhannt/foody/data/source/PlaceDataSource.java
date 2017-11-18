@@ -15,6 +15,7 @@ public interface PlaceDataSource {
     }
 
     interface RemoteDataSource {
-        void getListPlace(OnLoadListItemListener<Place> listener);
+        void getListPlace(OnLoadListItemListener<Place> listener,int nextItemCount,
+                          int totalLoadedItem);
     }
 }

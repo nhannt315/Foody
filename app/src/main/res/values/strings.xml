@@ -64,5 +64,16 @@
 
     <!--WhereEat-->
     <string name="order">Đặt món</string>
+
+    <string name="like">Thích</string>
+    <string name="review">Đánh giá</string>
+    <string name="comment">Bình luận</string>
+    <string name="checkin">Checkin</string>
+    <string name="save">Lưu lại</string>
+    <string name="share">Chia sẻ</string>
+    <string name="save_image">Tải ảnh</string>
+
+    <string name="opening">Đang mở cửa</string>
+    <string name="closing">Đang đóng cửa</string>
 </resources>
 

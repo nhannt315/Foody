@@ -18,14 +18,13 @@ import nhannt.foody.interfaces.OnLoadListItemListener;
 /**
  * Created by nhannt on 09/11/2017.
  */
-
 public class WhereEatPresenter implements WhereEatContract.Presenter {
-
     private WhereEatContract.View mView;
     private PlaceRepository mPlaceRepository;
     private LocationRepository mLocationRepository;
 
-    public WhereEatPresenter(PlaceRepository placeRepository, LocationRepository locationRepository) {
+    public WhereEatPresenter(PlaceRepository placeRepository,
+                             LocationRepository locationRepository) {
         mPlaceRepository = placeRepository;
         mLocationRepository = locationRepository;
     }
@@ -45,12 +44,10 @@ public class WhereEatPresenter implements WhereEatContract.Presenter {
 
     @Override
     public void onStart() {
-
     }
 
     @Override
     public void onStop() {
-
     }
 
     @Override
@@ -67,6 +64,6 @@ public class WhereEatPresenter implements WhereEatContract.Presenter {
                 mView.setListPlace(list);
                 mView.hideProgress();
             }
-        });
+        }, 3 + mView.getLoadedItemCount(), mView.getLoadedItemCount());
     }
 }
