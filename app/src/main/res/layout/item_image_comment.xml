@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white"
+    android:layout_margin="5dp"
+    android:gravity="center">
+
+    <nhannt.foody.widgets.SquareImageView
+        android:id="@+id/img_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_login_2"/>
+
+    <FrameLayout
+        android:id="@+id/frame_more_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/transparent_bg_login">
+        <TextView
+            android:id="@+id/tv_more_image_comment_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="+19"
+            android:textColor="@color/color_white"
+            android:textSize="30sp"/>
+    </FrameLayout>
+
+</FrameLayout>

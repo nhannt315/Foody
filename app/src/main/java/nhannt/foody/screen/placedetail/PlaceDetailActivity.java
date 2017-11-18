@@ -1,8 +1,12 @@
 package nhannt.foody.screen.placedetail;
 
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +26,9 @@ public class PlaceDetailActivity extends BaseActivity implements PlaceDetailCont
         mTvTotalCheckin, mTvTotalBookmark, mTvTotalComment, mTvPlaceNameToolbar;
     private ImageView mImgPlaceImage;
     private Toolbar mToolbar;
+    private RecyclerView mRecyclerViewComment;
+    private NestedScrollView mNestedScrollView;
+    private CommentRecyclerViewAdapter mCommentAdapter;
     private Place mPlace;
 
     @Override
@@ -52,6 +59,12 @@ public class PlaceDetailActivity extends BaseActivity implements PlaceDetailCont
         mTvTotalImage.setText(mPlace.getHinhanhquanan().size() + "");
         mTvTotalComment.setText(mPlace.getBinhluanList().size() + "");
         mTvStatus.setText(Utils.getPlaceStatus(mPlace.getGiomocua(), mPlace.getGiodongcua()));
+        // Setup recycler view
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        mRecyclerViewComment.setLayoutManager(layoutManager);
+        mRecyclerViewComment.setNestedScrollingEnabled(false);
+        mCommentAdapter = new CommentRecyclerViewAdapter(this, mPlace.getBinhluanList());
+        mRecyclerViewComment.setAdapter(mCommentAdapter);
     }
 
     @Override
@@ -72,6 +85,8 @@ public class PlaceDetailActivity extends BaseActivity implements PlaceDetailCont
         mTvTotalComment = findViewById(R.id.tv_total_comment);
         mImgPlaceImage = findViewById(R.id.img_place);
         mTvPlaceNameToolbar = findViewById(R.id.tv_place_name_toolbar);
+        mRecyclerViewComment = findViewById(R.id.rv_comment_detail);
+        mNestedScrollView = findViewById(R.id.nested_scroll_view_place_detail);
     }
 
     @Override
