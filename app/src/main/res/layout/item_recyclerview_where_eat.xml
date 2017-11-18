@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:id="@+id/card_view_where_eat_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/tv_avg_point_place"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/background_circle"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/color_white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_place_name_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gogi House"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tv_place_address_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="36 Triệu Quang Phục - Quận 3"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_distance_place_item"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:text="6.5 km"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:id="@+id/img_place_image_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/btn_order_where_eat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_radius_5dp"
+            android:drawableTop="@drawable/ic_local_shipping_white_24dp"
+            android:padding="5dp"
+            android:text="@string/order"
+            android:textAllCaps="false"
+            android:textColor="@color/color_white"/>
+
+        <LinearLayout
+            android:id="@+id/ll_comment_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="gone">
+
+            <nhannt.foody.widgets.CircleImageView
+                android:id="@+id/img_user_comment_1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:src="@drawable/bg_login"
+                android:text="6.8"
+                android:textColor="@color/color_white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_title_comment_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gogi House"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tv_content_comment_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="36 Triệu Quang Phục - Quận 3"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_comment_rate_item_1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="6.5"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_comment_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="gone">
+
+            <nhannt.foody.widgets.CircleImageView
+                android:id="@+id/img_user_comment_2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:src="@drawable/bg_login"
+                android:text="6.8"
+                android:textColor="@color/color_white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_title_comment_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gogi House"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tv_content_comment_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="36 Triệu Quang Phục - Quận 3"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_comment_rate_item_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="6.5"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_total_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:drawableLeft="@drawable/ic_insert_comment_black_24dp"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="153"/>
+
+            <TextView
+                android:id="@+id/tv_total_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:drawableLeft="@drawable/ic_photo_camera_black_24dp"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="0"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

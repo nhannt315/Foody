@@ -4,21 +4,23 @@
     <string name="fb_login_protocol_scheme">fb1891318747802104</string>
 
     <string name="error">Lỗi</string>
+    <string name="agree">Đồng ý</string>
 
     <!--Splash Screen-->
     <string name="version_splash">Phiên bản %s</string>
     <string name="app_info_splash">nhannt</string>
     <string name="loading_splash">Đang tải</string>
+    <string name="success">Thành công</string>
 
     <!--Login Register Screen-->
-    <string name="email_login">Email Đăng nhập</string>
+    <string name="email_login">Email</string>
     <string name="login">Đăng nhập</string>
     <string name="password_login">Mật khẩu</string>
     <string name="or_login_by">Hoặc</string>
     <string name="fb_login">Đăng nhập với Facebook</string>
     <string name="gg_login">Đăng nhập với Google</string>
     <string name="forgot_pass">Quên mật khẩu</string>
-    <string name="register">Đăng ký</string>
+    <string name="register"><u>Đăng ký</u></string>
     <string name="retype_password">Nhập lại mật khẩu</string>
     <string name="please_fill_all">Vui lòng nhập tất cả các trường</string>
     <string name="two_pass_must_match">Hai mật khẩu phải trùng nhau</string>
@@ -28,6 +30,50 @@
     </string>
     <string name="register_success">Đăng ký thành công!</string>
     <string name="login_error">Đăng nhập thất bại,vui lòng kiểm tra lại email và mật khẩu</string>
+    <string name="forgot_pass_content">
+        <u>Khôi phục mật khẩu</u>
+    </string>
+    <string name="reset_pass">
+        Bạn vui lòng nhập địa chỉ email vào khung bên dưới để tiến hành khôi phục mật khẩu
+    </string>
+    <string name="not_member">
+        Bạn không phải là thành viên ?<u> Đăng ký mới!</u>
+    </string>
+    <string name="email_sended">
+        Gửi email thành công,vui lòng kiểm tra email của bạn!
+    </string>
+    <string name="email_not_found">
+        Thất bại,Email này không có trong hệ thống,bạn có chắc đây là email bạn đã đăng ký?
+    </string>
 
+    <!--Toolbar-->
+    <string name="what_to_eat">Ăn gì ?</string>
+    <string name="where_to_eat">Ở đâu</string>
 
+    <!--Home-->
+    <string name="newest">Mới nhất</string>
+    <string name="category">Danh mục</string>
+    <string name="area">Hà Nội</string>
+
+    <string name="nearby">Gần đây</string>
+    <string name="order_delivery">Giao hàng</string>
+    <string name="reviews">Đánh giá</string>
+    <string name="game_and_fun">Game and Fun</string>
+    <string name="blogs">Bài viết</string>
+    <string name="top_members">Top thành viên</string>
+
+    <!--WhereEat-->
+    <string name="order">Đặt món</string>
+
+    <string name="like">Thích</string>
+    <string name="review">Đánh giá</string>
+    <string name="comment">Bình luận</string>
+    <string name="checkin">Checkin</string>
+    <string name="save">Lưu lại</string>
+    <string name="share">Chia sẻ</string>
+    <string name="save_image">Tải ảnh</string>
+
+    <string name="opening">Đang mở cửa</string>
+    <string name="closing">Đang đóng cửa</string>
 </resources>
+

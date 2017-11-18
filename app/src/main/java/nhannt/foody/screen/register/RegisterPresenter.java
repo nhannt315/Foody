@@ -1,14 +1,18 @@
 package nhannt.foody.screen.register;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.Toast;
 
 import nhannt.foody.FoodyApplication;
 import nhannt.foody.R;
 import nhannt.foody.data.source.UserRepository;
 import nhannt.foody.utils.Validators;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Created by nhannt on 22/08/2017.
@@ -66,11 +70,13 @@ public class RegisterPresenter implements RegisterContract.Presenter {
             );
         }
         mView.showProgress();
-        mUserRepository.registerUser(email, password1, new OnCompleteListener() {
+        mUserRepository.registerUser(email, password1, new OnCompleteListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task task) {
-                mView.hideProgress();
-                if (task.isSuccessful()){
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    FirebaseUser user = task.getResult().getUser();
+                    mUserRepository.updateUserInfo(user.getUid(), user.getEmail(), "user.png");
+                    mView.hideProgress();
                     mView.onRegisterSuccess();
                 }
             }

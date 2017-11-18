@@ -4,6 +4,8 @@
           xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:name=".FoodyApplication"
@@ -30,6 +32,10 @@
         <activity android:name=".screen.home.HomeActivity">
         </activity>
         <activity android:name=".screen.register.RegisterActivity">
+        </activity>
+        <activity android:name=".screen.resetpassword.ResetPasswordActivity">
+        </activity>
+        <activity android:name=".screen.placedetail.PlaceDetailActivity">
         </activity>
     </application>
 

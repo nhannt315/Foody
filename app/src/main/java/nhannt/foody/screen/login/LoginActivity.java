@@ -17,6 +17,7 @@ import nhannt.foody.data.source.remote.UserRemoteDataSource;
 import nhannt.foody.screen.BaseActivity;
 import nhannt.foody.screen.home.HomeActivity;
 import nhannt.foody.screen.register.RegisterActivity;
+import nhannt.foody.screen.resetpassword.ResetPasswordActivity;
 import nhannt.foody.utils.Navigator;
 import nhannt.foody.R;
 import nhannt.foody.utils.Utils;
@@ -100,6 +101,7 @@ public class LoginActivity extends BaseActivity
                 mPresenter.loginEmail(email, password);
                 break;
             case R.id.tv_forgot_pass:
+                mNavigator.startActivity(ResetPasswordActivity.class);
                 break;
             case R.id.tv_register:
                 mNavigator.startActivity(RegisterActivity.class);
