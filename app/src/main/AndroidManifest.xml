@@ -37,6 +37,8 @@
         </activity>
         <activity android:name=".screen.placedetail.PlaceDetailActivity">
         </activity>
+        <activity android:name=".screen.commentdetail.CommentDetailActivity">
+        </activity>
     </application>
 
 </manifest>

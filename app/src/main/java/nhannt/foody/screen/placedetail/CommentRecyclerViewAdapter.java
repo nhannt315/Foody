@@ -58,7 +58,7 @@ public class CommentRecyclerViewAdapter
         });
         if (comment.getListImage().size() > 0) {
             ImageCommentRecyclerViewAdapter imageAdapter = new ImageCommentRecyclerViewAdapter
-                (mContext, comment.getListImage());
+                (mContext, comment.getListImage(), comment, false);
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(mContext, 2);
             holder.mRecyclerViewImage.setLayoutManager(layoutManager);
             holder.mRecyclerViewImage.setAdapter(imageAdapter);

@@ -1,6 +1,7 @@
 package nhannt.foody.screen.placedetail;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -18,6 +20,8 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
 import nhannt.foody.R;
+import nhannt.foody.data.model.Comment;
+import nhannt.foody.screen.commentdetail.CommentDetailActivity;
 
 /**
  * Created by nhannt on 18/11/2017.
@@ -26,12 +30,16 @@ public class ImageCommentRecyclerViewAdapter extends RecyclerView
     .Adapter<ImageCommentRecyclerViewAdapter.ViewHolder> {
     private Context mContext;
     private ArrayList<String> mImageList;
+    private Comment mComment;
+    private boolean mIsDetail;
     private LayoutInflater mLayoutInflater;
 
-    public ImageCommentRecyclerViewAdapter(Context context,
-                                           ArrayList<String> imageList) {
+    public ImageCommentRecyclerViewAdapter(Context context, ArrayList<String> imageList,
+                                           Comment comment, boolean isDetail) {
         mContext = context;
         mImageList = imageList;
+        mComment = comment;
+        mIsDetail = isDetail;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
 
@@ -52,18 +60,37 @@ public class ImageCommentRecyclerViewAdapter extends RecyclerView
                 Glide.with(mContext).load(uri.toString()).into(holder.mImage);
             }
         });
+        if (mIsDetail)
+            return;
         if (position == 3) {
             int restImage = mImageList.size() - 4;
             if (restImage > 0) {
                 holder.mFrameLayout.setVisibility(View.VISIBLE);
                 holder.mTvTotalImage.setText("+" + restImage);
+                holder.mImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent iCommentDetail = new Intent(mContext, CommentDetailActivity.class);
+                        iCommentDetail.putExtra("comment", mComment);
+                        mContext.startActivity(iCommentDetail);
+                    }
+                });
             }
         }
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        if(!mIsDetail){
+            if(mImageList.size() < 4){
+                return mImageList.size();
+            }else{
+                return 4;
+            }
+
+        }else{
+            return mImageList.size();
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
