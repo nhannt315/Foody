@@ -8,12 +8,11 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -30,25 +29,25 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import nhannt.foody.R;
 import nhannt.foody.data.model.Branch;
 import nhannt.foody.data.model.Place;
 import nhannt.foody.data.model.PlaceWifi;
 import nhannt.foody.screen.BaseActivity;
+import nhannt.foody.screen.placedirection.PlaceDirectionActivity;
 import nhannt.foody.screen.wifi.WifiActivity;
 import nhannt.foody.utils.Constants;
 import nhannt.foody.utils.Utils;
 
 public class PlaceDetailActivity extends BaseActivity
-    implements PlaceDetailContract.View, OnMapReadyCallback {
+    implements PlaceDetailContract.View, OnMapReadyCallback, View.OnClickListener {
     private PlaceDetailContract.Presenter mPresenter;
     private TextView mTvPlaceName, mTvPlaceAddress, mTvOpenTime, mTvStatus, mTvTotalImage,
         mTvTotalCheckin, mTvTotalBookmark, mTvTotalComment, mTvPlaceNameToolbar,
         mTvPriceRange, mTvWifiName, mTvWifiPassword, mTvWifiDate;
+    private LinearLayout mLLMap;
     private LinearLayout mLLUtils, mLLWifiContainer;
     private ImageView mImgPlaceImage;
     private Toolbar mToolbar;
@@ -72,21 +71,11 @@ public class PlaceDetailActivity extends BaseActivity
         setViews();
         mPresenter.getPlaceImage(mPlace.getHinhanhquanan().get(0));
         mPresenter.downloadUtilImage(mPlace.getTienich());
-
     }
 
     private void initEvents() {
-        mLLWifiContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mPlace != null) {
-                    Intent intent = new Intent(PlaceDetailActivity.this, WifiActivity.class);
-                    intent.putExtra(Constants.PLACE_WIFI_KEY, mPlace.getMaquanan());
-                    intent.putExtra(Constants.PLACE_WIFI_NAME_KEY, mPlace.getTenquanan());
-                    startActivity(intent);
-                }
-            }
-        });
+        mLLWifiContainer.setOnClickListener(this);
+        mLLMap.setOnClickListener(this);
     }
 
     private void setToolbar() {
@@ -157,6 +146,7 @@ public class PlaceDetailActivity extends BaseActivity
         mTvWifiPassword = findViewById(R.id.tv_password_wifi);
         mTvWifiDate = findViewById(R.id.tv_wifi_date);
         mLLWifiContainer = findViewById(R.id.ll_wifi);
+        mLLMap = findViewById(R.id.ll_map_place_detail);
     }
 
     @Override
@@ -229,5 +219,32 @@ public class PlaceDetailActivity extends BaseActivity
         googleMap.addMarker(markerOptions);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14);
         googleMap.moveCamera(cameraUpdate);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ll_wifi:
+                if (mPlace != null) {
+                    Intent intent = new Intent(PlaceDetailActivity.this, WifiActivity.class);
+                    intent.putExtra(Constants.PLACE_CODE_KEY, mPlace.getMaquanan());
+                    intent.putExtra(Constants.PLACE_NAME_KEY, mPlace.getTenquanan());
+                    startActivity(intent);
+                }
+                break;
+            case R.id.ll_map_place_detail:
+                if (mPlace != null) {
+                    Intent intentToMapDetail = new Intent(this, PlaceDirectionActivity.class);
+                    intentToMapDetail.putExtra(Constants.PLACE_NAME_KEY,
+                        mPlace.getTenquanan());
+                    intentToMapDetail.putExtra(Constants.LATITUDE_KEY, Utils.getClosetBranch(mPlace)
+                        .getLatitude());
+                    intentToMapDetail
+                        .putExtra(Constants.LONGITUDE_KEY, Utils.getClosetBranch(mPlace)
+                            .getLongitude());
+                    startActivity(intentToMapDetail);
+                }
+                break;
+        }
     }
 }

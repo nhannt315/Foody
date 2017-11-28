@@ -37,8 +37,8 @@ public class WifiActivity extends BaseActivity implements WifiDetailContract.Vie
         initViews();
         initEvents();
         mPresenter.setView(this);
-        mPlaceCode = getIntent().getStringExtra(Constants.PLACE_WIFI_KEY);
-        mPlaceName = getIntent().getStringExtra(Constants.PLACE_WIFI_NAME_KEY);
+        mPlaceCode = getIntent().getStringExtra(Constants.PLACE_CODE_KEY);
+        mPlaceName = getIntent().getStringExtra(Constants.PLACE_NAME_KEY);
         mTvPlaceName.setText(mPlaceName);
 
     }
@@ -48,7 +48,7 @@ public class WifiActivity extends BaseActivity implements WifiDetailContract.Vie
             @Override
             public void onClick(View v) {
                 Intent ipopup = new Intent(WifiActivity.this, UpdateWifiPopup.class);
-                ipopup.putExtra(Constants.PLACE_WIFI_KEY, mPlaceCode);
+                ipopup.putExtra(Constants.PLACE_CODE_KEY, mPlaceCode);
                 startActivity(ipopup);
             }
         });

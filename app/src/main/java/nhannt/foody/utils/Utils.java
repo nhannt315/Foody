@@ -12,6 +12,8 @@ import java.util.Date;
 
 import nhannt.foody.FoodyApplication;
 import nhannt.foody.R;
+import nhannt.foody.data.model.Branch;
+import nhannt.foody.data.model.Place;
 
 /**
  * Created by nhannt on 22/08/2017.
@@ -37,6 +39,10 @@ public class Utils {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         return simpleDateFormat.format(calendar.getTime());
+    }
+
+    public static Branch getClosetBranch(Place place){
+        return place.getLstBranch().get(0);
     }
 
     public static String getPlaceStatus(String openTime, String closeTime) {

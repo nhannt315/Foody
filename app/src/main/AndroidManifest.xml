@@ -45,8 +45,11 @@
         </activity>
         <activity android:name=".screen.wifi.WifiActivity">
         </activity>
-        <activity android:name=".screen.updatewifi.UpdateWifiPopup"
+        <activity
+            android:name=".screen.updatewifi.UpdateWifiPopup"
             android:theme="@style/Theme.AppCompat.Light.Dialog">
+        </activity>
+        <activity android:name=".screen.placedirection.PlaceDirectionActivity">
         </activity>
     </application>
 

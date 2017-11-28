@@ -1,16 +1,10 @@
 package nhannt.foody.screen.eat_where;
 
 import android.location.Location;
-import android.util.Log;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
-import nhannt.foody.data.LocationRepository;
+import nhannt.foody.data.source.LocationRepository;
 import nhannt.foody.data.model.Place;
 import nhannt.foody.data.source.PlaceRepository;
 import nhannt.foody.interfaces.OnLoadListItemListener;

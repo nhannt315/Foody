@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import nhannt.foody.R;
 import nhannt.foody.screen.BaseActivity;
-import nhannt.foody.screen.BaseView;
 import nhannt.foody.utils.Constants;
 
 /**
@@ -28,7 +27,7 @@ public class UpdateWifiPopup extends BaseActivity implements UpdateWifiContract.
         setContentView(R.layout.layout_popup_update_wifi);
         initViews();
         initEvents();
-        mPlaceCode = getIntent().getStringExtra(Constants.PLACE_WIFI_KEY);
+        mPlaceCode = getIntent().getStringExtra(Constants.PLACE_CODE_KEY);
         mPresenter = new UpdateWifiPresenter();
         mPresenter.setView(this);
     }
