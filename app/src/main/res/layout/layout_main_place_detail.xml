@@ -112,18 +112,12 @@
                         android:textSize="20sp"
                         android:textStyle="bold"/>
 
-                    <TextView
-                        android:id="@+id/tv_place_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:text="23 duong tran hung dao"/>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="10dp"
-                        android:background="@color/color_black"/>
+                        android:background="@color/color_bg_home"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -225,7 +219,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="10dp"
-                        android:background="@color/color_black"/>
+                        android:background="@color/color_bg_home"/>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -251,8 +245,14 @@
                     </RelativeLayout>
                 </LinearLayout>
 
-
+                <include layout="@layout/layout_utilities_placedetail"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_bg_home"/>
+                <include layout="@layout/layout_wifi_place_detail"/>
                 <include layout="@layout/layout_comment_detail"/>
+
             </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>

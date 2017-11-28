@@ -75,5 +75,12 @@
 
     <string name="opening">Đang mở cửa</string>
     <string name="closing">Đang đóng cửa</string>
+    <string name="update_wifi">Cập nhật wifi</string>
+    <string name="enter_wifi_name">Nhập tên wifi</string>
+    <string name="enter_wifi_password">Nhập mật khẩu wifi</string>
+    <string name="accept">Đồng ý</string>
+    <string name="please_fill_all_wifi">Vui lòng nhập đầy đủ thông tin wifi</string>
+    <string name="add_successfully">Thêm mới thành công</string>
+    <string name="click_to_add_wifi">Nhấn để thêm wifi</string>
 </resources>
 

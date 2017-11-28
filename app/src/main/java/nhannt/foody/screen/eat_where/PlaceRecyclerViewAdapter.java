@@ -2,6 +2,7 @@ package nhannt.foody.screen.eat_where;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -144,10 +145,14 @@ public class PlaceRecyclerViewAdapter
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigator navigator = new Navigator((Activity) mContext);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("place", place);
-                navigator.startActivity(PlaceDetailActivity.class, bundle);
+                Intent intent = new Intent(mContext, PlaceDetailActivity.class);
+                intent.putExtra("place", place);
+                mContext.startActivity(intent);
+//                Log.d("checkPlace", place.getHinhanhquanan().size() + "");
+//                Navigator navigator = new Navigator((Activity) mContext);
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable("place", place);
+//                navigator.startActivity(PlaceDetailActivity.class, bundle);
             }
         });
     }

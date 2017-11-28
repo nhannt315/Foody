@@ -74,6 +74,7 @@ public class PlaceRemoteDataSource implements PlaceDataSource.RemoteDataSource {
                 lstImage.add(dataValueImage.getValue(String.class));
             }
             place.setHinhanhquanan(lstImage);
+            place.setMaquanan(dataValuePlace.getKey());
             // lay danh sach binh luan cua quan an
             DataSnapshot snapshotComment = dataSnapshot.child("binhluans").child
                 (dataValuePlace.getKey());

@@ -13,37 +13,7 @@ public class Branch implements Parcelable {
     public Branch() {
     }
 
-    protected Branch(Parcel in) {
-        diachi = in.readString();
-        latitude = in.readDouble();
-        longitude = in.readDouble();
-        distanceToCurrent = in.readDouble();
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(diachi);
-        dest.writeDouble(latitude);
-        dest.writeDouble(longitude);
-        dest.writeDouble(distanceToCurrent);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<Branch> CREATOR = new Creator<Branch>() {
-        @Override
-        public Branch createFromParcel(Parcel in) {
-            return new Branch(in);
-        }
-
-        @Override
-        public Branch[] newArray(int size) {
-            return new Branch[size];
-        }
-    };
 
     public String getDiachi() {
         return diachi;
@@ -76,4 +46,36 @@ public class Branch implements Parcelable {
     public void setDistanceToCurrent(double distanceToCurrent) {
         this.distanceToCurrent = distanceToCurrent;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.diachi);
+        dest.writeDouble(this.latitude);
+        dest.writeDouble(this.longitude);
+        dest.writeDouble(this.distanceToCurrent);
+    }
+
+    protected Branch(Parcel in) {
+        this.diachi = in.readString();
+        this.latitude = in.readDouble();
+        this.longitude = in.readDouble();
+        this.distanceToCurrent = in.readDouble();
+    }
+
+    public static final Creator<Branch> CREATOR = new Creator<Branch>() {
+        @Override
+        public Branch createFromParcel(Parcel source) {
+            return new Branch(source);
+        }
+
+        @Override
+        public Branch[] newArray(int size) {
+            return new Branch[size];
+        }
+    };
 }

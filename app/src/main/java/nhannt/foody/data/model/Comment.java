@@ -19,45 +19,6 @@ public class Comment implements Parcelable {
     public Comment() {
     }
 
-    protected Comment(Parcel in) {
-        mabinhluan = in.readString();
-        chamdiem = in.readDouble();
-        luotthich = in.readLong();
-        noidung = in.readString();
-        tieude = in.readString();
-        mauser = in.readString();
-        listImage = in.createStringArrayList();
-        user = in.readParcelable(Member.class.getClassLoader());
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mabinhluan);
-        dest.writeDouble(chamdiem);
-        dest.writeLong(luotthich);
-        dest.writeString(noidung);
-        dest.writeString(tieude);
-        dest.writeString(mauser);
-        dest.writeStringList(listImage);
-        dest.writeParcelable(user, flags);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<Comment> CREATOR = new Creator<Comment>() {
-        @Override
-        public Comment createFromParcel(Parcel in) {
-            return new Comment(in);
-        }
-
-        @Override
-        public Comment[] newArray(int size) {
-            return new Comment[size];
-        }
-    };
 
     public String getMabinhluan() {
         return mabinhluan;
@@ -122,4 +83,44 @@ public class Comment implements Parcelable {
     public void setTieude(String tieude) {
         this.tieude = tieude;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.mabinhluan);
+        dest.writeDouble(this.chamdiem);
+        dest.writeLong(this.luotthich);
+        dest.writeParcelable(this.user, flags);
+        dest.writeString(this.noidung);
+        dest.writeString(this.tieude);
+        dest.writeString(this.mauser);
+        dest.writeStringList(this.listImage);
+    }
+
+    protected Comment(Parcel in) {
+        this.mabinhluan = in.readString();
+        this.chamdiem = in.readDouble();
+        this.luotthich = in.readLong();
+        this.user = in.readParcelable(Member.class.getClassLoader());
+        this.noidung = in.readString();
+        this.tieude = in.readString();
+        this.mauser = in.readString();
+        this.listImage = in.createStringArrayList();
+    }
+
+    public static final Creator<Comment> CREATOR = new Creator<Comment>() {
+        @Override
+        public Comment createFromParcel(Parcel source) {
+            return new Comment(source);
+        }
+
+        @Override
+        public Comment[] newArray(int size) {
+            return new Comment[size];
+        }
+    };
 }

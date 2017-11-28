@@ -33,6 +33,12 @@ public class Utils {
             .show();
     }
 
+    public static String getCurrentDate(String format) {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        return simpleDateFormat.format(calendar.getTime());
+    }
+
     public static String getPlaceStatus(String openTime, String closeTime) {
         String result = "";
         Calendar calendar = Calendar.getInstance();

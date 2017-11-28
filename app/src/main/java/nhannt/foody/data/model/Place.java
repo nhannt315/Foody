@@ -16,6 +16,8 @@ public class Place implements Parcelable {
     private String giodongcua;
     private String tenquanan;
     private String videogioithieu;
+    private long giatoida;
+    private long giatoithieu;
     private ArrayList<String> tienich;
     private ArrayList<String> hinhanhquanan;
     private ArrayList<Comment> binhluanList;
@@ -26,32 +28,21 @@ public class Place implements Parcelable {
     public Place() {
     }
 
-    protected Place(Parcel in) {
-        giaohang = in.readByte() != 0;
-        maquanan = in.readString();
-        giomocua = in.readString();
-        giodongcua = in.readString();
-        tenquanan = in.readString();
-        videogioithieu = in.readString();
-        tienich = in.createStringArrayList();
-        hinhanhquanan = in.createStringArrayList();
-        luotthich = in.readLong();
-        lstImageBitmap = in.createTypedArrayList(Bitmap.CREATOR);
-        lstBranch = in.createTypedArrayList(Branch.CREATOR);
-        binhluanList = in.createTypedArrayList(Comment.CREATOR);
+    public long getGiatoida() {
+        return giatoida;
     }
 
-    public static final Creator<Place> CREATOR = new Creator<Place>() {
-        @Override
-        public Place createFromParcel(Parcel in) {
-            return new Place(in);
-        }
+    public void setGiatoida(long giatoida) {
+        this.giatoida = giatoida;
+    }
 
-        @Override
-        public Place[] newArray(int size) {
-            return new Place[size];
-        }
-    };
+    public long getGiatoithieu() {
+        return giatoithieu;
+    }
+
+    public void setGiatoithieu(long giatoithieu) {
+        this.giatoithieu = giatoithieu;
+    }
 
     public ArrayList<Bitmap> getLstImageBitmap() {
         return lstImageBitmap;
@@ -156,17 +147,48 @@ public class Place implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeByte((byte) (giaohang ? 1 : 0));
-        dest.writeString(maquanan);
-        dest.writeString(giomocua);
-        dest.writeString(giodongcua);
-        dest.writeString(tenquanan);
-        dest.writeString(videogioithieu);
-        dest.writeStringList(tienich);
-        dest.writeStringList(hinhanhquanan);
-        dest.writeLong(luotthich);
-        dest.writeTypedList(lstImageBitmap);
-        dest.writeTypedList(lstBranch);
-        dest.writeTypedList(binhluanList);
+        dest.writeByte(this.giaohang ? (byte) 1 : (byte) 0);
+        dest.writeString(this.maquanan);
+        dest.writeString(this.giomocua);
+        dest.writeString(this.giodongcua);
+        dest.writeString(this.tenquanan);
+        dest.writeString(this.videogioithieu);
+        dest.writeLong(this.giatoida);
+        dest.writeLong(this.giatoithieu);
+        dest.writeStringList(this.tienich);
+        dest.writeStringList(this.hinhanhquanan);
+        dest.writeTypedList(this.binhluanList);
+        dest.writeLong(this.luotthich);
+        dest.writeTypedList(this.lstBranch);
+        dest.writeTypedList(this.lstImageBitmap);
     }
+
+    protected Place(Parcel in) {
+        this.giaohang = in.readByte() != 0;
+        this.maquanan = in.readString();
+        this.giomocua = in.readString();
+        this.giodongcua = in.readString();
+        this.tenquanan = in.readString();
+        this.videogioithieu = in.readString();
+        this.giatoida = in.readLong();
+        this.giatoithieu = in.readLong();
+        this.tienich = in.createStringArrayList();
+        this.hinhanhquanan = in.createStringArrayList();
+        this.binhluanList = in.createTypedArrayList(Comment.CREATOR);
+        this.luotthich = in.readLong();
+        this.lstBranch = in.createTypedArrayList(Branch.CREATOR);
+        this.lstImageBitmap = in.createTypedArrayList(Bitmap.CREATOR);
+    }
+
+    public static final Creator<Place> CREATOR = new Creator<Place>() {
+        @Override
+        public Place createFromParcel(Parcel source) {
+            return new Place(source);
+        }
+
+        @Override
+        public Place[] newArray(int size) {
+            return new Place[size];
+        }
+    };
 }

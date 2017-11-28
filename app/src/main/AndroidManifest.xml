@@ -19,17 +19,21 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA5eg_OEkGsSQt1wRIygQb9LfcCj8fZnKI"/>
 
         <activity android:name=".screen.splash.SplashScreenActivity">
+
+        </activity>
+        <activity android:name=".screen.login.LoginActivity">
+        </activity>
+        <activity android:name=".screen.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
-        <activity android:name=".screen.login.LoginActivity">
-        </activity>
-        <activity android:name=".screen.home.HomeActivity">
         </activity>
         <activity android:name=".screen.register.RegisterActivity">
         </activity>
@@ -38,6 +42,11 @@
         <activity android:name=".screen.placedetail.PlaceDetailActivity">
         </activity>
         <activity android:name=".screen.commentdetail.CommentDetailActivity">
+        </activity>
+        <activity android:name=".screen.wifi.WifiActivity">
+        </activity>
+        <activity android:name=".screen.updatewifi.UpdateWifiPopup"
+            android:theme="@style/Theme.AppCompat.Light.Dialog">
         </activity>
     </application>
 

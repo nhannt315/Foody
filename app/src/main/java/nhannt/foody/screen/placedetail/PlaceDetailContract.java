@@ -1,5 +1,9 @@
 package nhannt.foody.screen.placedetail;
 
+import java.util.ArrayList;
+
+import nhannt.foody.data.model.Place;
+import nhannt.foody.data.model.PlaceWifi;
 import nhannt.foody.screen.BasePresenter;
 import nhannt.foody.screen.BaseView;
 
@@ -9,9 +13,13 @@ import nhannt.foody.screen.BaseView;
 public interface PlaceDetailContract {
     interface View extends BaseView {
         void setPlaceImage(String url);
+        void appendUtilImage(String url);
+        void showListWifi(ArrayList<PlaceWifi> lstWifi);
     }
 
     interface Presenter extends BasePresenter<View> {
         void getPlaceImage(String imageTitle);
+        void downloadUtilImage(ArrayList<String> utilsList);
+        void getWifiList(String placeCode);
     }
 }
