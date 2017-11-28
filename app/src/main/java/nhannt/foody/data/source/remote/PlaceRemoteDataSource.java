@@ -2,19 +2,16 @@ package nhannt.foody.data.source.remote;
 
 import android.location.Location;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import nhannt.foody.data.LocationRepository;
+import nhannt.foody.data.source.LocationRepository;
 import nhannt.foody.data.model.Branch;
 import nhannt.foody.data.model.Comment;
 import nhannt.foody.data.model.Member;
@@ -74,6 +71,7 @@ public class PlaceRemoteDataSource implements PlaceDataSource.RemoteDataSource {
                 lstImage.add(dataValueImage.getValue(String.class));
             }
             place.setHinhanhquanan(lstImage);
+            place.setMaquanan(dataValuePlace.getKey());
             // lay danh sach binh luan cua quan an
             DataSnapshot snapshotComment = dataSnapshot.child("binhluans").child
                 (dataValuePlace.getKey());

@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 
 import nhannt.foody.R;
-import nhannt.foody.data.LocationRepository;
+import nhannt.foody.data.source.LocationRepository;
 import nhannt.foody.data.model.Place;
 import nhannt.foody.data.source.PlaceRepository;
 import nhannt.foody.data.source.remote.PlaceRemoteDataSource;
