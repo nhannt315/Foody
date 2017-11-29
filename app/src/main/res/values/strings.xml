@@ -84,5 +84,12 @@
     <string name="click_to_add_wifi">Nhấn để thêm wifi</string>
     <string name="current_location">Vị trí hiện tại</string>
     <string name="error_happend">Đã có lỗi xảy ra</string>
+    <string name="post">Đăng</string>
+    <string name="enter_subject">Nhập vào tiêu đề</string>
+    <string name="enter_content_comment">Nhập vào nội dung, ít nhất 100 từ đúng chính tả,
+        ngôn từ có văn hóa, không spam ... để được điểm thưởng!</string>
+    <string name="write_comment">Viết bình luận</string>
+    <string name="add">Thêm</string>
+    <string name="add_comment_success">Thêm mới bình luận thành công</string>
 </resources>
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="nhannt.foody.screen.selectimage.SelectImageActivity">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/color_foody">
+
+        <ImageView
+            android:id="@+id/add_image_from_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_a_photo_white_24dp"/>
+
+        <TextView
+            android:id="@+id/tv_done_select_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="@string/add"
+            android:textSize="15sp"
+            android:drawableLeft="@drawable/ic_add_white_24dp"
+            android:drawablePadding="2dp"
+            android:layout_marginRight="8dp"
+            android:textColor="@color/color_white"/>
+    </android.support.v7.widget.Toolbar>
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="2dp"
+        android:id="@+id/rv_select_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_bg_home"></android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

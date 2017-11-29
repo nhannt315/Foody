@@ -50,6 +50,10 @@ public class UpdateWifiPresenter implements UpdateWifiContract.Presenter {
             public void onComplete(@Nullable Void result) {
                 mView.updateWifiDone();
             }
+
+            @Override
+            public void onError() {
+            }
         });
     }
 }

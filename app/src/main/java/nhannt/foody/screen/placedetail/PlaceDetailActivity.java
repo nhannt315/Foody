@@ -9,10 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -33,9 +34,11 @@ import java.util.ArrayList;
 
 import nhannt.foody.R;
 import nhannt.foody.data.model.Branch;
+import nhannt.foody.data.model.Comment;
 import nhannt.foody.data.model.Place;
 import nhannt.foody.data.model.PlaceWifi;
 import nhannt.foody.screen.BaseActivity;
+import nhannt.foody.screen.addcomment.AddCommentActivity;
 import nhannt.foody.screen.placedirection.PlaceDirectionActivity;
 import nhannt.foody.screen.wifi.WifiActivity;
 import nhannt.foody.utils.Constants;
@@ -47,6 +50,7 @@ public class PlaceDetailActivity extends BaseActivity
     private TextView mTvPlaceName, mTvPlaceAddress, mTvOpenTime, mTvStatus, mTvTotalImage,
         mTvTotalCheckin, mTvTotalBookmark, mTvTotalComment, mTvPlaceNameToolbar,
         mTvPriceRange, mTvWifiName, mTvWifiPassword, mTvWifiDate;
+    private Button mBtnAddComment;
     private LinearLayout mLLMap;
     private LinearLayout mLLUtils, mLLWifiContainer;
     private ImageView mImgPlaceImage;
@@ -76,6 +80,7 @@ public class PlaceDetailActivity extends BaseActivity
     private void initEvents() {
         mLLWifiContainer.setOnClickListener(this);
         mLLMap.setOnClickListener(this);
+        mBtnAddComment.setOnClickListener(this);
     }
 
     private void setToolbar() {
@@ -113,8 +118,6 @@ public class PlaceDetailActivity extends BaseActivity
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerViewComment.setLayoutManager(layoutManager);
         mRecyclerViewComment.setNestedScrollingEnabled(false);
-        mCommentAdapter = new CommentRecyclerViewAdapter(this, mPlace.getBinhluanList());
-        mRecyclerViewComment.setAdapter(mCommentAdapter);
         // Map
         mMapFragment.getMapAsync(this);
     }
@@ -147,11 +150,14 @@ public class PlaceDetailActivity extends BaseActivity
         mTvWifiDate = findViewById(R.id.tv_wifi_date);
         mLLWifiContainer = findViewById(R.id.ll_wifi);
         mLLMap = findViewById(R.id.ll_map_place_detail);
+        mBtnAddComment = findViewById(R.id.btn_add_comment);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        mPresenter.setView(this);
+        mPresenter.getListComment(mPlace.getMaquanan());
         mPresenter.onStart();
     }
 
@@ -209,6 +215,13 @@ public class PlaceDetailActivity extends BaseActivity
     }
 
     @Override
+    public void showListComment(ArrayList<Comment> lstComment) {
+        mCommentAdapter = new CommentRecyclerViewAdapter(this, lstComment);
+        mRecyclerViewComment.setAdapter(mCommentAdapter);
+        Toast.makeText(this, lstComment.size() + "", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
         MarkerOptions markerOptions = new MarkerOptions();
@@ -243,6 +256,16 @@ public class PlaceDetailActivity extends BaseActivity
                         .putExtra(Constants.LONGITUDE_KEY, Utils.getClosetBranch(mPlace)
                             .getLongitude());
                     startActivity(intentToMapDetail);
+                }
+                break;
+            case R.id.btn_add_comment:
+                if (mPlace != null) {
+                    Intent intentToComment = new Intent(this, AddCommentActivity.class);
+                    intentToComment.putExtra(Constants.PLACE_CODE_KEY, mPlace.getMaquanan());
+                    intentToComment.putExtra(Constants.PLACE_ADDRESS_KEY,
+                        mTvPlaceAddress.getText().toString());
+                    intentToComment.putExtra(Constants.PLACE_NAME_KEY, mPlace.getTenquanan());
+                    startActivity(intentToComment);
                 }
                 break;
         }

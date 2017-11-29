@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="100dp"
+             android:layout_height="wrap_content">
+    <nhannt.foody.widgets.SquareImageView
+        android:id="@+id/img_selected_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="center"
+        android:src="@drawable/bg_login_2"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent_bg_login">
+        <ImageView
+            android:id="@+id/img_delete_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_cancel_white_24dp"
+            android:layout_alignParentRight="true"
+            android:padding="3dp"/>
+    </RelativeLayout>
+
+</FrameLayout>

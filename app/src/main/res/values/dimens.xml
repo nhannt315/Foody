@@ -33,4 +33,6 @@
     <dimen name="radio_button_padding_toolbar">10dp</dimen>
     <!--Home-->
     <dimen name="menu_padding_top_bottom_home">5dp</dimen>
+    <dimen name="item_image_spacing">4dp</dimen>
+
 </resources>
