@@ -7,4 +7,5 @@ import android.support.annotation.Nullable;
  */
 public interface OnCompleteListener<T> {
     void onComplete(@Nullable T result);
+    void onError();
 }

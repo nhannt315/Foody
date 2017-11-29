@@ -90,5 +90,6 @@
         ngôn từ có văn hóa, không spam ... để được điểm thưởng!</string>
     <string name="write_comment">Viết bình luận</string>
     <string name="add">Thêm</string>
+    <string name="add_comment_success">Thêm mới bình luận thành công</string>
 </resources>
 

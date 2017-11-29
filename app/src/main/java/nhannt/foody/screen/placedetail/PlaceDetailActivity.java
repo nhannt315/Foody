@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 
 import nhannt.foody.R;
 import nhannt.foody.data.model.Branch;
+import nhannt.foody.data.model.Comment;
 import nhannt.foody.data.model.Place;
 import nhannt.foody.data.model.PlaceWifi;
 import nhannt.foody.screen.BaseActivity;
@@ -116,8 +118,6 @@ public class PlaceDetailActivity extends BaseActivity
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerViewComment.setLayoutManager(layoutManager);
         mRecyclerViewComment.setNestedScrollingEnabled(false);
-        mCommentAdapter = new CommentRecyclerViewAdapter(this, mPlace.getBinhluanList());
-        mRecyclerViewComment.setAdapter(mCommentAdapter);
         // Map
         mMapFragment.getMapAsync(this);
     }
@@ -156,6 +156,8 @@ public class PlaceDetailActivity extends BaseActivity
     @Override
     protected void onStart() {
         super.onStart();
+        mPresenter.setView(this);
+        mPresenter.getListComment(mPlace.getMaquanan());
         mPresenter.onStart();
     }
 
@@ -210,6 +212,13 @@ public class PlaceDetailActivity extends BaseActivity
         } else {
             mTvWifiName.setText(getResources().getString(R.string.click_to_add_wifi));
         }
+    }
+
+    @Override
+    public void showListComment(ArrayList<Comment> lstComment) {
+        mCommentAdapter = new CommentRecyclerViewAdapter(this, lstComment);
+        mRecyclerViewComment.setAdapter(mCommentAdapter);
+        Toast.makeText(this, lstComment.size() + "", Toast.LENGTH_SHORT).show();
     }
 
     @Override

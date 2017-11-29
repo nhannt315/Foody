@@ -10,11 +10,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import nhannt.foody.R;
+import nhannt.foody.data.model.Comment;
 import nhannt.foody.screen.BaseActivity;
 import nhannt.foody.screen.selectimage.SelectImageActivity;
 import nhannt.foody.utils.Constants;
@@ -22,16 +25,19 @@ import nhannt.foody.utils.Constants;
 /**
  * Created by nhannt on 29/11/2017.
  */
-public class AddCommentActivity extends BaseActivity implements View.OnClickListener {
+public class AddCommentActivity extends BaseActivity implements View.OnClickListener,
+    AddCommentContract.View {
     private static final int SELECT_IMAGE_REQUEST_CODE = 123;
     private Toolbar mToolbar;
     private TextView mTvPlaceName, mTvPlaceAddress, mTvPostComment;
+    private ProgressBar mProgressBar;
     private RecyclerView mRvSelectedImage;
     private EditText mEdtCommentSubject, mEdtCommentContent;
     private ImageButton mBtnSelectImage;
     private ArrayList<String> mSelectedImageList = new ArrayList<>();
     private String mPlaceName, mPlaceCode, mPlaceAddress;
     private ImageSelectedRvAdapter mAdapter;
+    private AddCommentContract.Presenter mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,10 +47,19 @@ public class AddCommentActivity extends BaseActivity implements View.OnClickList
         initViews();
         initEvents();
         getDataFromIntent();
+        mPresenter = new AddCommentPresenter();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mPresenter.setView(this);
+        mPresenter.onStart();
     }
 
     private void initEvents() {
         mBtnSelectImage.setOnClickListener(this);
+        mTvPostComment.setOnClickListener(this);
     }
 
     private void initToolbar() {
@@ -69,13 +84,13 @@ public class AddCommentActivity extends BaseActivity implements View.OnClickList
         mEdtCommentContent = findViewById(R.id.edt_comment_content);
         mBtnSelectImage = findViewById(R.id.img_btn_add_image);
         mRvSelectedImage = findViewById(R.id.rv_selected_image);
+        mProgressBar = findViewById(R.id.progress_bar);
         // Recycler view
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager
             .HORIZONTAL, false);
         mRvSelectedImage.setLayoutManager(layoutManager);
         mAdapter = new ImageSelectedRvAdapter(this, mSelectedImageList);
         mRvSelectedImage.setAdapter(mAdapter);
-
     }
 
     private void getDataFromIntent() {
@@ -102,6 +117,46 @@ public class AddCommentActivity extends BaseActivity implements View.OnClickList
                 Intent intentSelectImage = new Intent(this, SelectImageActivity.class);
                 startActivityForResult(intentSelectImage, SELECT_IMAGE_REQUEST_CODE);
                 break;
+            case R.id.tv_post_comment:
+                Comment comment = new Comment();
+                comment.setTieude(mEdtCommentSubject.getText().toString());
+                comment.setNoidung(mEdtCommentContent.getText().toString());
+                comment.setListImage(mSelectedImageList);
+                mPresenter.addComment(mPlaceCode, comment, mSelectedImageList);
+                break;
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mPresenter.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.detachView();
+    }
+
+    @Override
+    public void showProgress() {
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        mProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void addCommentSuccess() {
+        Toast.makeText(this, getResources().getString(R.string.add_comment_success),
+            Toast.LENGTH_SHORT).show();
+        onBackPressed();
+    }
+
+    @Override
+    public void addCommentError() {
     }
 }

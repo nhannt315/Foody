@@ -1,6 +1,7 @@
 package nhannt.foody.screen.placedetail;
 
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.android.gms.location.places.Place;
@@ -15,9 +16,12 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
+import nhannt.foody.data.model.Comment;
 import nhannt.foody.data.model.PlaceUtil;
 import nhannt.foody.data.model.PlaceWifi;
+import nhannt.foody.data.source.CommentRepository;
 import nhannt.foody.data.source.WifiRepository;
+import nhannt.foody.interfaces.OnCompleteListener;
 import nhannt.foody.interfaces.OnLoadListItemListener;
 
 /**
@@ -26,9 +30,11 @@ import nhannt.foody.interfaces.OnLoadListItemListener;
 public class PlaceDetailPresenter implements PlaceDetailContract.Presenter {
     private PlaceDetailContract.View mView;
     private WifiRepository mWifiRepository;
+    private CommentRepository mCommentRepository;
 
     public PlaceDetailPresenter() {
         mWifiRepository = new WifiRepository();
+        mCommentRepository = new CommentRepository();
     }
 
     @Override
@@ -63,6 +69,8 @@ public class PlaceDetailPresenter implements PlaceDetailContract.Presenter {
 
     @Override
     public void downloadUtilImage(ArrayList<String> utilsList) {
+        if (utilsList == null)
+            return;
         for (String util : utilsList) {
             DatabaseReference nodeUtil = FirebaseDatabase.getInstance().getReference().child
                 ("quanlytienichs").child(util);
@@ -98,5 +106,21 @@ public class PlaceDetailPresenter implements PlaceDetailContract.Presenter {
                 mView.showListWifi(list);
             }
         });
+    }
+
+    @Override
+    public void getListComment(String placeCode) {
+        mCommentRepository.getCommentListOfPlace(placeCode,
+            new OnCompleteListener<ArrayList<Comment>>() {
+                @Override
+                public void onComplete(@Nullable ArrayList<Comment> result) {
+                    if (mView != null)
+                        mView.showListComment(result);
+                }
+
+                @Override
+                public void onError() {
+                }
+            });
     }
 }

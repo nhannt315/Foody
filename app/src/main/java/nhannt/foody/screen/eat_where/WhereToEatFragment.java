@@ -51,7 +51,6 @@ public class WhereToEatFragment extends BaseFragment implements WhereEatContract
         mPresenter.setView(this);
         initViews();
         mIsLoading = true;
-        mPresenter.getListPlace();
         mCurrentLocation = mPresenter.getCurrentLocation();
     }
 
@@ -84,6 +83,8 @@ public class WhereToEatFragment extends BaseFragment implements WhereEatContract
     @Override
     public void onStart() {
         super.onStart();
+        mPresenter.setView(this);
+        mPresenter.getListPlace();
         mPresenter.onStart();
     }
 
