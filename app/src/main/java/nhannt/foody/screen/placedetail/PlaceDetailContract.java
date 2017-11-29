@@ -17,6 +17,7 @@ public interface PlaceDetailContract {
         void appendUtilImage(String url);
         void showListWifi(ArrayList<PlaceWifi> lstWifi);
         void showListComment(ArrayList<Comment> lstComment);
+        void setVideo(String url);
     }
 
     interface Presenter extends BasePresenter<View> {
@@ -24,5 +25,6 @@ public interface PlaceDetailContract {
         void downloadUtilImage(ArrayList<String> utilsList);
         void getWifiList(String placeCode);
         void getListComment(String placeCode);
+        void getVideoUrl(String link);
     }
 }

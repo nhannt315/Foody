@@ -12,8 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -50,6 +52,7 @@ public class PlaceDetailActivity extends BaseActivity
     private TextView mTvPlaceName, mTvPlaceAddress, mTvOpenTime, mTvStatus, mTvTotalImage,
         mTvTotalCheckin, mTvTotalBookmark, mTvTotalComment, mTvPlaceNameToolbar,
         mTvPriceRange, mTvWifiName, mTvWifiPassword, mTvWifiDate;
+    private ImageView mImgPlayBtn;
     private Button mBtnAddComment;
     private LinearLayout mLLMap;
     private LinearLayout mLLUtils, mLLWifiContainer;
@@ -61,6 +64,7 @@ public class PlaceDetailActivity extends BaseActivity
     private Place mPlace;
     private GoogleMap mGoogleMap;
     private MapFragment mMapFragment;
+    private VideoView mVideoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +77,17 @@ public class PlaceDetailActivity extends BaseActivity
         mPlace = getIntent().getParcelableExtra("place");
         setToolbar();
         setViews();
-        mPresenter.getPlaceImage(mPlace.getHinhanhquanan().get(0));
         mPresenter.downloadUtilImage(mPlace.getTienich());
+        if(mPlace.getVideogioithieu() != null){
+            mPresenter.getVideoUrl(mPlace.getVideogioithieu());
+            mImgPlaceImage.setVisibility(View.GONE);
+            mImgPlayBtn.setVisibility(View.VISIBLE);
+        }else{
+            mPresenter.getPlaceImage(mPlace.getHinhanhquanan().get(0));
+            mVideoView.setVisibility(View.GONE);
+            mImgPlaceImage.setVisibility(View.VISIBLE);
+            mImgPlayBtn.setVisibility(View.GONE);
+        }
     }
 
     private void initEvents() {
@@ -94,6 +107,16 @@ public class PlaceDetailActivity extends BaseActivity
     protected void onResume() {
         super.onResume();
         mPresenter.getWifiList(mPlace.getMaquanan());
+        if(mPlace.getVideogioithieu() != null)
+            mImgPlayBtn.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(mPlace.getVideogioithieu() != null){
+            mVideoView.pause();
+        }
     }
 
     private void setViews() {
@@ -151,6 +174,8 @@ public class PlaceDetailActivity extends BaseActivity
         mLLWifiContainer = findViewById(R.id.ll_wifi);
         mLLMap = findViewById(R.id.ll_map_place_detail);
         mBtnAddComment = findViewById(R.id.btn_add_comment);
+        mVideoView = findViewById(R.id.video_trailer);
+        mImgPlayBtn = findViewById(R.id.img_play_btn);
     }
 
     @Override
@@ -218,7 +243,25 @@ public class PlaceDetailActivity extends BaseActivity
     public void showListComment(ArrayList<Comment> lstComment) {
         mCommentAdapter = new CommentRecyclerViewAdapter(this, lstComment);
         mRecyclerViewComment.setAdapter(mCommentAdapter);
-        Toast.makeText(this, lstComment.size() + "", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setVideo(String url) {
+        mVideoView.setVisibility(View.VISIBLE);
+
+        mVideoView.setVideoPath(url);
+        mVideoView.seekTo(1);
+        mImgPlayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mVideoView.start();
+                mImgPlayBtn.setVisibility(View.GONE);
+                MediaController mediaController = new MediaController(PlaceDetailActivity.this);
+                mediaController.setAnchorView(mVideoView);
+                mediaController.setMediaPlayer(mVideoView);
+                mVideoView.setMediaController(mediaController);
+            }
+        });
     }
 
     @Override

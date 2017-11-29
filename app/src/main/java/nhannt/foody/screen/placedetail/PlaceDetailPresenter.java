@@ -20,6 +20,7 @@ import nhannt.foody.data.model.Comment;
 import nhannt.foody.data.model.PlaceUtil;
 import nhannt.foody.data.model.PlaceWifi;
 import nhannt.foody.data.source.CommentRepository;
+import nhannt.foody.data.source.PhotoVideoRepository;
 import nhannt.foody.data.source.WifiRepository;
 import nhannt.foody.interfaces.OnCompleteListener;
 import nhannt.foody.interfaces.OnLoadListItemListener;
@@ -31,10 +32,12 @@ public class PlaceDetailPresenter implements PlaceDetailContract.Presenter {
     private PlaceDetailContract.View mView;
     private WifiRepository mWifiRepository;
     private CommentRepository mCommentRepository;
+    private PhotoVideoRepository mPhotoVideoRepository;
 
     public PlaceDetailPresenter() {
         mWifiRepository = new WifiRepository();
         mCommentRepository = new CommentRepository();
+        mPhotoVideoRepository = new PhotoVideoRepository();
     }
 
     @Override
@@ -122,5 +125,20 @@ public class PlaceDetailPresenter implements PlaceDetailContract.Presenter {
                 public void onError() {
                 }
             });
+    }
+
+    @Override
+    public void getVideoUrl(String link) {
+        mPhotoVideoRepository.getVideoDownloadUrl(link, new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@Nullable String result) {
+                if(mView != null)
+                    mView.setVideo(result);
+            }
+
+            @Override
+            public void onError() {
+            }
+        });
     }
 }

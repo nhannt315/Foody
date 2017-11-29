@@ -18,5 +18,6 @@ public interface PhotoVideoDataSource {
 
     interface Remote {
         void uploadListImage(ArrayList<String> lstImage, OnCompleteListener<Void> listener);
+        void getVideoDownloadUrl(String link, OnCompleteListener<String> callback);
     }
 }
