@@ -92,6 +92,17 @@
     <string name="add">Thêm</string>
     <string name="add_comment_success">Thêm mới bình luận thành công</string>
     <string name="menu">Thực đơn</string>
-
+    <string name="enter_place_name">Nhập tên quán ăn</string>
+    <string name="max_price">Giá tối đa</string>
+    <string name="min_price">Giá tối thiểu</string>
+    <string name="no_order_delivery">Không giao hàng</string>
+    <string name="open_time">Giờ mở cửa %s</string>
+    <string name="close_time">Giờ đóng cửa %s</string>
+    <string name="branch">Chi nhánh</string>
+    <string name="dish_title">Tên món</string>
+    <string name="price">Giá tiền</string>
+    <string name="save_place">Lưu quán ăn</string>
+    <string name="add_menu">Thêm thực đơn</string>
+    <string name="add_new_place">Thêm mới quán ăn</string>
 </resources>
 
