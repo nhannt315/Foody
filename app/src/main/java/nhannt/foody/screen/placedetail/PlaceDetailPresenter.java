@@ -17,9 +17,11 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
 import nhannt.foody.data.model.Comment;
+import nhannt.foody.data.model.MenuModel;
 import nhannt.foody.data.model.PlaceUtil;
 import nhannt.foody.data.model.PlaceWifi;
 import nhannt.foody.data.source.CommentRepository;
+import nhannt.foody.data.source.MenuRepository;
 import nhannt.foody.data.source.PhotoVideoRepository;
 import nhannt.foody.data.source.WifiRepository;
 import nhannt.foody.interfaces.OnCompleteListener;
@@ -33,11 +35,13 @@ public class PlaceDetailPresenter implements PlaceDetailContract.Presenter {
     private WifiRepository mWifiRepository;
     private CommentRepository mCommentRepository;
     private PhotoVideoRepository mPhotoVideoRepository;
+    private MenuRepository mMenuRepository;
 
     public PlaceDetailPresenter() {
         mWifiRepository = new WifiRepository();
         mCommentRepository = new CommentRepository();
         mPhotoVideoRepository = new PhotoVideoRepository();
+        mMenuRepository = new MenuRepository();
     }
 
     @Override
@@ -132,7 +136,7 @@ public class PlaceDetailPresenter implements PlaceDetailContract.Presenter {
         mPhotoVideoRepository.getVideoDownloadUrl(link, new OnCompleteListener<String>() {
             @Override
             public void onComplete(@Nullable String result) {
-                if(mView != null)
+                if (mView != null)
                     mView.setVideo(result);
             }
 
@@ -140,5 +144,21 @@ public class PlaceDetailPresenter implements PlaceDetailContract.Presenter {
             public void onError() {
             }
         });
+    }
+
+    @Override
+    public void getMenuList(String placeCode) {
+        mMenuRepository.getMenuListOfPlace(placeCode,
+            new OnCompleteListener<ArrayList<MenuModel>>() {
+                @Override
+                public void onComplete(@Nullable ArrayList<MenuModel> result) {
+                    if (mView != null)
+                        mView.setMenuList(result);
+                }
+
+                @Override
+                public void onError() {
+                }
+            });
     }
 }

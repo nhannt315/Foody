@@ -25,16 +25,16 @@
             android:value="AIzaSyA5eg_OEkGsSQt1wRIygQb9LfcCj8fZnKI"/>
 
         <activity android:name=".screen.splash.SplashScreenActivity">
+
+        </activity>
+        <activity android:name=".screen.login.LoginActivity">
+        </activity>
+        <activity android:name=".screen.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
-        <activity android:name=".screen.login.LoginActivity">
-        </activity>
-        <activity android:name=".screen.home.HomeActivity">
-
         </activity>
         <activity android:name=".screen.register.RegisterActivity">
         </activity>
