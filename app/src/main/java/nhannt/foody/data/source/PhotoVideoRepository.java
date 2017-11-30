@@ -35,4 +35,9 @@ public class PhotoVideoRepository
     public void uploadListImage(ArrayList<String> lstImage, OnCompleteListener<Void> listener) {
         mPhotoVideoRemoteDataSource.uploadListImage(lstImage, listener);
     }
+
+    @Override
+    public void getVideoDownloadUrl(String link, OnCompleteListener<String> callback) {
+        mPhotoVideoRemoteDataSource.getVideoDownloadUrl(link, callback);
+    }
 }

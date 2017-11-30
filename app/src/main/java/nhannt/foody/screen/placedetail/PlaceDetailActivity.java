@@ -12,8 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -35,6 +37,7 @@ import java.util.ArrayList;
 import nhannt.foody.R;
 import nhannt.foody.data.model.Branch;
 import nhannt.foody.data.model.Comment;
+import nhannt.foody.data.model.MenuModel;
 import nhannt.foody.data.model.Place;
 import nhannt.foody.data.model.PlaceWifi;
 import nhannt.foody.screen.BaseActivity;
@@ -50,17 +53,20 @@ public class PlaceDetailActivity extends BaseActivity
     private TextView mTvPlaceName, mTvPlaceAddress, mTvOpenTime, mTvStatus, mTvTotalImage,
         mTvTotalCheckin, mTvTotalBookmark, mTvTotalComment, mTvPlaceNameToolbar,
         mTvPriceRange, mTvWifiName, mTvWifiPassword, mTvWifiDate;
+    private ImageView mImgPlayBtn;
     private Button mBtnAddComment;
     private LinearLayout mLLMap;
     private LinearLayout mLLUtils, mLLWifiContainer;
     private ImageView mImgPlaceImage;
     private Toolbar mToolbar;
-    private RecyclerView mRecyclerViewComment;
+    private RecyclerView mRecyclerViewComment, mRecyclerViewMenu;
     private NestedScrollView mNestedScrollView;
     private CommentRecyclerViewAdapter mCommentAdapter;
+    private MenuRecyclerViewAdapter mMenuAdapter;
     private Place mPlace;
     private GoogleMap mGoogleMap;
     private MapFragment mMapFragment;
+    private VideoView mVideoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +79,17 @@ public class PlaceDetailActivity extends BaseActivity
         mPlace = getIntent().getParcelableExtra("place");
         setToolbar();
         setViews();
-        mPresenter.getPlaceImage(mPlace.getHinhanhquanan().get(0));
         mPresenter.downloadUtilImage(mPlace.getTienich());
+        if(mPlace.getVideogioithieu() != null){
+            mPresenter.getVideoUrl(mPlace.getVideogioithieu());
+            mImgPlaceImage.setVisibility(View.GONE);
+            mImgPlayBtn.setVisibility(View.VISIBLE);
+        }else{
+            mPresenter.getPlaceImage(mPlace.getHinhanhquanan().get(0));
+            mVideoView.setVisibility(View.GONE);
+            mImgPlaceImage.setVisibility(View.VISIBLE);
+            mImgPlayBtn.setVisibility(View.GONE);
+        }
     }
 
     private void initEvents() {
@@ -94,6 +109,17 @@ public class PlaceDetailActivity extends BaseActivity
     protected void onResume() {
         super.onResume();
         mPresenter.getWifiList(mPlace.getMaquanan());
+        mPresenter.getMenuList(mPlace.getMaquanan());
+        if(mPlace.getVideogioithieu() != null)
+            mImgPlayBtn.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(mPlace.getVideogioithieu() != null){
+            mVideoView.pause();
+        }
     }
 
     private void setViews() {
@@ -114,10 +140,14 @@ public class PlaceDetailActivity extends BaseActivity
         } else {
             mTvPriceRange.setVisibility(View.GONE);
         }
-        // Setup recycler view
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        mRecyclerViewComment.setLayoutManager(layoutManager);
+        // Setup recycler view comment
+        RecyclerView.LayoutManager layoutManagerComment = new LinearLayoutManager(this);
+        mRecyclerViewComment.setLayoutManager(layoutManagerComment);
         mRecyclerViewComment.setNestedScrollingEnabled(false);
+        // Setup recycler view menu
+        LinearLayoutManager layoutManagerMenu = new LinearLayoutManager(this);
+        mRecyclerViewMenu.setLayoutManager(layoutManagerMenu);
+        mRecyclerViewMenu.setNestedScrollingEnabled(false);
         // Map
         mMapFragment.getMapAsync(this);
     }
@@ -151,6 +181,9 @@ public class PlaceDetailActivity extends BaseActivity
         mLLWifiContainer = findViewById(R.id.ll_wifi);
         mLLMap = findViewById(R.id.ll_map_place_detail);
         mBtnAddComment = findViewById(R.id.btn_add_comment);
+        mVideoView = findViewById(R.id.video_trailer);
+        mImgPlayBtn = findViewById(R.id.img_play_btn);
+        mRecyclerViewMenu = findViewById(R.id.rv_menu_list);
     }
 
     @Override
@@ -218,7 +251,33 @@ public class PlaceDetailActivity extends BaseActivity
     public void showListComment(ArrayList<Comment> lstComment) {
         mCommentAdapter = new CommentRecyclerViewAdapter(this, lstComment);
         mRecyclerViewComment.setAdapter(mCommentAdapter);
-        Toast.makeText(this, lstComment.size() + "", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setVideo(String url) {
+        mVideoView.setVisibility(View.VISIBLE);
+
+        mVideoView.setVideoPath(url);
+        mVideoView.seekTo(5000);
+        mImgPlayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mVideoView.seekTo(1);
+                mVideoView.start();
+                mImgPlayBtn.setVisibility(View.GONE);
+                MediaController mediaController = new MediaController(PlaceDetailActivity.this);
+                mediaController.setAnchorView(mVideoView);
+                mediaController.setMediaPlayer(mVideoView);
+                mVideoView.setMediaController(mediaController);
+            }
+        });
+    }
+
+    @Override
+    public void setMenuList(ArrayList<MenuModel> lstMenu) {
+        mMenuAdapter = new MenuRecyclerViewAdapter(this, lstMenu);
+        mRecyclerViewMenu.setAdapter(mMenuAdapter);
+        mMenuAdapter.notifyDataSetChanged();
     }
 
     @Override

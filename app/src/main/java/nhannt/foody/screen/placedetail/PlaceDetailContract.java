@@ -3,6 +3,7 @@ package nhannt.foody.screen.placedetail;
 import java.util.ArrayList;
 
 import nhannt.foody.data.model.Comment;
+import nhannt.foody.data.model.MenuModel;
 import nhannt.foody.data.model.Place;
 import nhannt.foody.data.model.PlaceWifi;
 import nhannt.foody.screen.BasePresenter;
@@ -17,6 +18,8 @@ public interface PlaceDetailContract {
         void appendUtilImage(String url);
         void showListWifi(ArrayList<PlaceWifi> lstWifi);
         void showListComment(ArrayList<Comment> lstComment);
+        void setVideo(String url);
+        void setMenuList(ArrayList<MenuModel> lstMenu);
     }
 
     interface Presenter extends BasePresenter<View> {
@@ -24,5 +27,7 @@ public interface PlaceDetailContract {
         void downloadUtilImage(ArrayList<String> utilsList);
         void getWifiList(String placeCode);
         void getListComment(String placeCode);
+        void getVideoUrl(String link);
+        void getMenuList(String placeCode);
     }
 }

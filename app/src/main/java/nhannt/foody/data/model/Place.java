@@ -3,6 +3,7 @@ package nhannt.foody.data.model;
 import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.view.Menu;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class Place implements Parcelable {
     private long giatoida;
     private long giatoithieu;
     private ArrayList<String> tienich;
+    private ArrayList<MenuModel> lstMenu;
     private ArrayList<String> hinhanhquanan;
     private ArrayList<Comment> binhluanList;
     private long luotthich;
@@ -26,6 +28,14 @@ public class Place implements Parcelable {
     private ArrayList<Bitmap> lstImageBitmap;
 
     public Place() {
+    }
+
+    public ArrayList<MenuModel> getLstMenu() {
+        return lstMenu;
+    }
+
+    public void setLstMenu(ArrayList<MenuModel> lstMenu) {
+        this.lstMenu = lstMenu;
     }
 
     public long getGiatoida() {

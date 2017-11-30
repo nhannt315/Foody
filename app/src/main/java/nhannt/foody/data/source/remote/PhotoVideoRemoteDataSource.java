@@ -3,6 +3,8 @@ package nhannt.foody.data.source.remote;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -36,5 +38,22 @@ public class PhotoVideoRemoteDataSource implements PhotoVideoDataSource.Remote {
                     }
                 });
         }
+    }
+
+    @Override
+    public void getVideoDownloadUrl(String link, final OnCompleteListener<String> callback) {
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child
+            ("videos").child(link);
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                callback.onComplete(uri.toString());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                callback.onError();
+            }
+        });
     }
 }
