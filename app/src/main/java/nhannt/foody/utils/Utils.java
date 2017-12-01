@@ -35,13 +35,18 @@ public class Utils {
             .show();
     }
 
+    public static String getCurrentTimeInMills() {
+        Calendar calendar = Calendar.getInstance();
+        return String.valueOf(calendar.getTimeInMillis());
+    }
+
     public static String getCurrentDate(String format) {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         return simpleDateFormat.format(calendar.getTime());
     }
 
-    public static Branch getClosetBranch(Place place){
+    public static Branch getClosetBranch(Place place) {
         return place.getLstBranch().get(0);
     }
 

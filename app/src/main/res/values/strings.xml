@@ -104,5 +104,11 @@
     <string name="save_place">Lưu quán ăn</string>
     <string name="add_menu">Thêm thực đơn</string>
     <string name="add_new_place">Thêm mới quán ăn</string>
+    <string name="util">Tiện tích</string>
+    <string name="branch_address">Địa chỉ chi nhánh</string>
+    <string name="area_str">Khu vực</string>
+    <string name="image">Hình ảnh</string>
+    <string name="delete">Xóa</string>
+    <string name="select_image">Chọn hình ảnh</string>
 </resources>
 

@@ -21,4 +21,9 @@ public class MenuRepository implements MenuDataSource.Remote, MenuDataSource.Loc
                                    OnCompleteListener<ArrayList<MenuModel>> callback) {
         mMenuRemoteDataSource.getMenuListOfPlace(placeCode, callback);
     }
+
+    @Override
+    public void getAllMenu(OnCompleteListener<ArrayList<MenuModel>> callback) {
+        mMenuRemoteDataSource.getAllMenu(callback);
+    }
 }

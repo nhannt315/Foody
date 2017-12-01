@@ -60,10 +60,10 @@ public class MenuRemoteDataSource implements MenuDataSource.Remote {
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
+                            callback.onError();
                         }
                     });
                 }
-
             }
 
             @Override
@@ -71,5 +71,28 @@ public class MenuRemoteDataSource implements MenuDataSource.Remote {
                 callback.onError();
             }
         });
+    }
+
+    @Override
+    public void getAllMenu(final OnCompleteListener<ArrayList<MenuModel>> callback) {
+        FirebaseDatabase.getInstance().getReference().child("thucdons")
+            .addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    ArrayList<MenuModel> menuModelList = new ArrayList<>();
+                    for (DataSnapshot valueMenu : dataSnapshot.getChildren()) {
+                        MenuModel menuModel = new MenuModel();
+                        menuModel.setMathucdon(valueMenu.getKey());
+                        menuModel.setTenthucdon(valueMenu.getValue(String.class));
+                        menuModelList.add(menuModel);
+                    }
+                    callback.onComplete(menuModelList);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    callback.onError();
+                }
+            });
     }
 }

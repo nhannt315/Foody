@@ -5,6 +5,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import nhannt.foody.data.model.Place;
+import nhannt.foody.interfaces.OnCompleteListener;
 import nhannt.foody.interfaces.OnLoadListItemListener;
 
 /**
@@ -17,5 +18,6 @@ public interface PlaceDataSource {
     interface RemoteDataSource {
         void getListPlace(OnLoadListItemListener<Place> listener,int nextItemCount,
                           int totalLoadedItem);
+        void getAreaList(OnCompleteListener<ArrayList<String>> callback);
     }
 }

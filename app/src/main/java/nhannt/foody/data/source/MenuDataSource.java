@@ -12,6 +12,7 @@ public interface MenuDataSource {
     interface Remote {
         void getMenuListOfPlace(String placeCode, OnCompleteListener<ArrayList<MenuModel>>
             callback);
+        void getAllMenu(OnCompleteListener<ArrayList<MenuModel>> callback);
     }
 
     interface Local {

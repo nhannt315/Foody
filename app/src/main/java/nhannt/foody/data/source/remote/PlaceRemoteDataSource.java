@@ -17,6 +17,7 @@ import nhannt.foody.data.model.Comment;
 import nhannt.foody.data.model.Member;
 import nhannt.foody.data.model.Place;
 import nhannt.foody.data.source.PlaceDataSource;
+import nhannt.foody.interfaces.OnCompleteListener;
 import nhannt.foody.interfaces.OnLoadListItemListener;
 
 /**
@@ -46,6 +47,26 @@ public class PlaceRemoteDataSource implements PlaceDataSource.RemoteDataSource {
         } else {
             mData.addListenerForSingleValueEvent(valueEventListener);
         }
+    }
+
+    @Override
+    public void getAreaList(final OnCompleteListener<ArrayList<String>> callback) {
+        final ArrayList<String> areaList = new ArrayList<>();
+        FirebaseDatabase.getInstance().getReference().child("khuvucs")
+            .addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot valueArea : dataSnapshot.getChildren()) {
+                        areaList.add(valueArea.getKey());
+                    }
+                    callback.onComplete(areaList);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    callback.onError();
+                }
+            });
     }
 
     private void mGetPlaceList(DataSnapshot dataSnapshot, OnLoadListItemListener<Place> listener,
